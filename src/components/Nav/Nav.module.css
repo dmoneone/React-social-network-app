@@ -1,0 +1,21 @@
+.main_nav{
+    background: rgb(16, 65, 16);
+    grid-area: nav;
+  }
+  
+  .main_nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main_nav ul li{
+    color: white;
+    padding: 10px;
+  }
+  
+  .main_nav ul li:last-child{
+    margin-top: 30px;
+    padding: 10px;
+  }
+  

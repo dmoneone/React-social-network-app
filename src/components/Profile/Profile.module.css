@@ -1,0 +1,10 @@
+
+  
+  .profile_content{
+    background: lightgreen;
+    grid-area: content;
+  }
+  
+  .profile_content .img_block img{
+    width: 100%;
+  }
