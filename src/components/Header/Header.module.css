@@ -1,9 +1,6 @@
-.header{
-    background: lightgrey;
-    grid-area: header;
-  }
+
   
-  .header .logo_wrap img{
-    width: 50px;
-  }
+.logo_wrap img{
+  width: 50px;
+}
   

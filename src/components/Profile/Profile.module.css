@@ -1,10 +1,10 @@
 
   
-  .profile_content{
+  .content{
     background: lightgreen;
-    grid-area: content;
+    display: block;
   }
   
-  .profile_content .img_block img{
+  .content .main_img img{
     width: 100%;
   }

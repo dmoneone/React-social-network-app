@@ -1,4 +1,7 @@
 
+a{
+  color: #000;
+}
 .app-wrapper{
   width: 1100px;
   margin: 0 auto;
@@ -9,3 +12,16 @@
                        "nav content";
 }
 
+.main-content{
+  grid-area: content;
+}
+
+.header{
+  background: lightgrey;
+  grid-area: header;
+}
+
+.main-nav{
+  background: rgb(16, 65, 16);
+  grid-area: nav;
+}
