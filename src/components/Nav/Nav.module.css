@@ -6,13 +6,20 @@
     padding: 0;
   }
   
-  .nav li{
+  .item{
     color: white;
     padding: 10px;
   }
   
-  .nav li:last-child{
+  .item:last-child{
     margin-top: 30px;
     padding: 10px;
   }
-  
+
+  .item a {
+    color: white;
+  }
+
+  .item a.active{
+      color: crimson;
+  }

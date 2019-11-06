@@ -1,14 +1,15 @@
 import React from 'react';
 import classes from'./Nav.module.css'
+import {NavLink} from 'react-router-dom';
 const Nav = () => {
     return (
         <nav className="main-nav">
             <ul className={classes.nav}>
-                <li><a href="/profile">Prfile</a></li>
-                <li><a href="/messages">Messages</a></li>
-                <li>News</li>
-                <li>Music</li>
-                <li>Settings</li>
+                <li className={classes.item}><NavLink to="/profile" activeClassName={classes.active}>Prfile</NavLink></li>
+                <li className={classes.item}><NavLink to="/messages" activeClassName={classes.active}>Messages</NavLink></li>
+                <li className={classes.item}><NavLink to="/news" activeClassName={classes.active}>News</NavLink></li>
+                <li className={classes.item}>Music</li>
+                <li className={classes.item}>Settings</li>
             </ul>
         </nav>
     );
