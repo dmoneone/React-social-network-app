@@ -3,7 +3,7 @@ import c from './Dialog.module.css';
 import {NavLink} from 'react-router-dom';
 
 const Dialog = props => {
-    const path = "/messages/1" + props.id;
+    const path = "/messages/" + props.id;
     return (
         <div className={c.item}>
             <NavLink activeClassName={c.active} to={path}>{props.name}</NavLink>
