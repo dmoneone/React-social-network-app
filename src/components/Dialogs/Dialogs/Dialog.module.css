@@ -1,0 +1,12 @@
+
+.item{
+    padding: 20px;
+    display: block;
+}
+
+.item a {
+    color: black;
+}
+.item a.active{
+    color: crimson;
+}

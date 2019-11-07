@@ -1,31 +1,7 @@
 .content{
     display: block;
     display: grid;
-    background:dimgray;
     grid-template-columns: 1fr 1fr;
 }
 
-.contact_list ul li{
-    padding: 20px;
-}
 
-.contact_list ul li a{
-    color: black;
-}
-
-.contact_list ul li.active{
-    color: crimson;
-}
-
-.messages{
-
-}
-
-.message{
-    padding: 20px;
-    display: block;
-}
-
-.active{
-    color: gold !important;
-}

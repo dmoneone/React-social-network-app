@@ -54,6 +54,7 @@ table {
 
 .main-content{
   grid-area: content;
+  background: rgb(146, 139, 139);
 }
 
 .header{
