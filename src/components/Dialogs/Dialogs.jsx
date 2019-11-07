@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
-import Dialog from './Dialogs/Dialog';
+import Dialog from './DialogItems/Dialog';
 import Message from './Messages/Message';
 
 const dialogData = [
