@@ -2,20 +2,18 @@ import React from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
 
-const postData = [
-    {msg: "jopa", quantityOfLikes: 10},
-    {msg: "Chlen", quantityOfLikes: 100}
-];
 
-const postJSXData = postData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes}/>))
 
-const MyPosts = () => {
+
+
+const MyPosts = (props) => {
+    const postsJSXData = props.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} key={item.msg} />))
     return (
         <div className={classes.block}>
             My posts
             
             <div className={classes.new_posts_wrap}>
-                { postJSXData }
+                { postsJSXData }
             </div>
         </div>
     )
