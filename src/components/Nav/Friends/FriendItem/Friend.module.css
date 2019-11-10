@@ -1,0 +1,7 @@
+.item{
+    width: 100%;
+    border: 1px solid white;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

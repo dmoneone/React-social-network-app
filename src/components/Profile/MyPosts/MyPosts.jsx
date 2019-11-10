@@ -7,7 +7,7 @@ import Post from './Post/Post';
 
 
 const MyPosts = (props) => {
-    const postsJSXData = props.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} key={item.msg} />))
+    const postsJSXData = props.state.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} key={item.msg} />))
     return (
         <div className={classes.block}>
             My posts

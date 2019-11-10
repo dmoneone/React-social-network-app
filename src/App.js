@@ -10,17 +10,16 @@ import News from './components/News/News';
 const  App = props => {
  
   return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        <Header/>
-        <Nav/>
-        <div className="main-content">
-          <Route path='/messages' render={()=> <Dialogs dialogData={props.dialogData} messagesData={props.messagesData} />} />
-          <Route path='/profile' render={()=> <Profile postsData={props.postsData} />} />
-          <Route path='/news' component={News} />
-        </div>
+    
+    <div className="app-wrapper">
+      <Header/>
+      <Nav state={props.state.navComponent} />
+      <div className="main-content">
+        <Route path='/messages' render={()=> <Dialogs state={props.state.dialogsPage} />} />
+        <Route path='/profile' render={()=> <Profile state={props.state.profilePage} />} />
+        <Route path='/news' component={News} />
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 
