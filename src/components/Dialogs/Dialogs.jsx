@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import Dialog from './DialogItems/Dialog';
 import Message from './Messages/Message';
+import Chat from './Chat/Chat';
 
 
 
@@ -15,8 +16,11 @@ const Dialogs = props => {
             <div className={classes.contact_list}>
                 { dialogJSXData }
             </div>
-            <div className={classes.messages}>
+            <div className={classes.messages_list}>
                 { messagesJSXData }
+            </div>
+            <div className={classes.chat_wrap}>
+                <Chat/>
             </div>
         </content>
     )

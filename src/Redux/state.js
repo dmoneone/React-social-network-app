@@ -1,3 +1,5 @@
+import {renderEntireTree} from '../render';
+
 const state = {
     dialogsPage : {
         dialogData : [
@@ -14,7 +16,9 @@ const state = {
     profilePage : {
         postsData : [
             {msg: "jopa", quantityOfLikes: 10},
-            {msg: "Chlen", quantityOfLikes: 100}
+            {msg: "Chlen", quantityOfLikes: 100},
+            {msg: "1", quantityOfLikes: 100},
+            {msg: "Chl2222en", quantityOfLikes: 100}
         ]
     },
     navComponent : {
@@ -22,6 +26,16 @@ const state = {
             friends : [{name: 'Alex'},{name: 'Kate'},{name: 'Jora'}]
         }
     }
+}
+
+
+export const addPost = msg => {
+    const newPost = {
+        msg: msg,
+        quantityOfLikes: 0
+    }
+    state.profilePage.postsData.push(newPost);
+    renderEntireTree(state);
 }
 
 export default state;

@@ -7,6 +7,7 @@ import Nav from './components/Nav/Nav';
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 
+
 const  App = props => {
  
   return (
@@ -16,7 +17,7 @@ const  App = props => {
       <Nav state={props.state.navComponent} />
       <div className="main-content">
         <Route path='/messages' render={()=> <Dialogs state={props.state.dialogsPage} />} />
-        <Route path='/profile' render={()=> <Profile state={props.state.profilePage} />} />
+        <Route path='/profile' render={()=> <Profile state={props.state.profilePage} addPost={props.addPost}/>} />
         <Route path='/news' component={News} />
       </div>
     </div>

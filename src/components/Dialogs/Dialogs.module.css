@@ -2,6 +2,18 @@
     display: block;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: "d m"
+                       "c c";
 }
 
+.contact_list{
+    grid-area: d;
+}
 
+.messages_list{
+    grid-area: m;
+}
+
+.chat_wrap{
+    grid-area: c;
+}
