@@ -8,11 +8,15 @@ import FormAddingPost from './Form/Form';
 
 
 const MyPosts = (props) => {
-    const postsJSXData = props.state.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} key={item.msg} />))
+
+    const postsJSXData = props.profilePage.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} />))
     return (
         <div className={classes.block}>
             <div>
-                <FormAddingPost addPost={props.addPost} state={props.state.postsData}/>
+                <FormAddingPost addPost={props.addPost}
+                                profilePage={props.profilePage}
+                                replaceNewPostMsg={props.replaceNewPostMsg}
+                />
             </div>
             
             <div className={classes.new_posts_wrap}>

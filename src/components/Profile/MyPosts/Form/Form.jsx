@@ -4,14 +4,16 @@ const FormAddingPost = (props) => {
     const textArea = React.createRef();
 
     const addPost = e => {
-        const value = textArea.current.value;
-        props.addPost(value);
-        console.log(props.state)
+        props.addPost();
     }
 
+    const texareaOnChangeHandler = e => {
+        props.replaceNewPostMsg(textArea.current.value);
+    }
+    
     return (
         <div>
-            <textarea ref={textArea} cols="30" rows="10"></textarea>
+            <textarea onChange={texareaOnChangeHandler} ref={textArea} cols="30" rows="10" value={props.profilePage.newPostMsg}/>
             <button onClick={addPost}>add</button>
         </div>
     )

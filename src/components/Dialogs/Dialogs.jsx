@@ -9,8 +9,8 @@ import Chat from './Chat/Chat';
 
 
 const Dialogs = props => {
-    const messagesJSXData = props.state.messagesData.map(item => (<Message msg={item.msg} key={item.msg} />));
-    const dialogJSXData = props.state.dialogData.map(item => (<Dialog name={item.name} id={item.id} key={item.id}/>));
+    const messagesJSXData = props.dialogsPage.messagesData.map(item => (<Message msg={item.msg} />));
+    const dialogJSXData = props.dialogsPage.dialogData.map(item => (<Dialog name={item.name} id={item.id} />));
     return (
         <content className={classes.content}>
             <div className={classes.contact_list}>

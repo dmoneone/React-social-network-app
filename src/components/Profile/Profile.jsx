@@ -9,7 +9,10 @@ const Profile = (props) => {
                 <img src="https://miro.medium.com/max/3600/1*HSisLuifMO6KbLfPOKtLow.jpeg"/>
             </div>
             <ProfileInfo/>
-            <MyPosts state={props.state} addPost={props.addPost}/>
+            <MyPosts profilePage={props.profilePage}
+                     addPost={props.addPost}
+                     replaceNewPostMsg={props.replaceNewPostMsg}
+            />
         </content>
     );
 }

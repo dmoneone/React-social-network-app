@@ -14,6 +14,7 @@ const state = {
         ]
     },
     profilePage : {
+        newPostMsg : 'Input anything',
         postsData : [
             {msg: "jopa", quantityOfLikes: 10},
             {msg: "Chlen", quantityOfLikes: 100},
@@ -28,13 +29,20 @@ const state = {
     }
 }
 
+window.state = state;
 
-export const addPost = msg => {
+export const addPost = () => {
     const newPost = {
-        msg: msg,
+        msg: state.profilePage.newPostMsg,
         quantityOfLikes: 0
     }
     state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostMsg = '';
+    renderEntireTree(state);
+}
+
+export const replaceNewPostMsg = msg => {
+    state.profilePage.newPostMsg = msg;
     renderEntireTree(state);
 }
 
