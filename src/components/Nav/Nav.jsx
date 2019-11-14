@@ -12,7 +12,7 @@ const Nav = props => {
                 <li className={classes.item}>Music</li>
                 <li className={classes.item}>Settings</li>
             </ul>
-            <Friends state={props.state.sidebar.friends} />
+            <Friends friends={props.navComponent.sidebar.friends} />
         </nav>
     );
 }

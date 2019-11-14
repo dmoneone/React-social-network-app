@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter,Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './App.css'
 import Header from './components/Header/Header.jsx';
 import Profile from './components/Profile/Profile.jsx';
@@ -9,11 +9,12 @@ import News from './components/News/News';
 
 
 const  App = props => {
+  console.log(props)
   return (
     
     <div className="app-wrapper">
       <Header/>
-      <Nav state={props.state.navComponent} />
+      <Nav navComponent={props.state.navComponent} />
       <div className="main-content">
         <Route path='/messages' render={()=> <Dialogs dialogsPage={props.state.dialogsPage} />} />
         <Route path='/profile' render={()=> <Profile profilePage={props.state.profilePage}
