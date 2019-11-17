@@ -17,11 +17,7 @@ const  App = props => {
       <Nav navComponent={props.state.navComponent} />
       <div className="main-content">
         <Route path='/messages' render={()=> <Dialogs dialogsPage={props.state.dialogsPage} />} />
-        <Route path='/profile' render={()=> <Profile profilePage={props.state.profilePage}
-                                                     addPost={props.addPost}
-                                                     replaceNewPostMsg={props.replaceNewPostMsg}
-                                             />
-        }/>
+        <Route path='/profile' render={()=> <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
         <Route path='/news' component={News} />
       </div>
     </div>

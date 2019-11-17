@@ -1,55 +1,59 @@
-let renderEntireTree = () => {
-    console.log('state was changed');
-}
 
-const state = {
-    dialogsPage : {
-        dialogData : [
-            {name: 'Kurash', id: 1},
-            {name: 'Salo', id: 2},
-            {name: 'Kate', id: 3}
-        ],
-        messagesData : [
-            {msg: "Dash pisky ebat?"},
-            {msg: "228"},
-            {msg: "ass"}
-        ]
+const store = {
+    _state: {
+        dialogsPage : {
+            dialogData : [
+                {name: 'Kurash', id: 1},
+                {name: 'Salo', id: 2},
+                {name: 'Kate', id: 3}
+            ],
+            messagesData : [
+                {msg: "Dash pisky ebat?"},
+                {msg: "228"},
+                {msg: "ass"}
+            ]
+        },
+        profilePage : {
+            newPostMsg : 'Input anything',
+            postsData : [
+                {msg: "jopa", quantityOfLikes: 10},
+                {msg: "Chlen", quantityOfLikes: 100},
+                {msg: "1", quantityOfLikes: 100},
+                {msg: "Chl2222en", quantityOfLikes: 100}
+            ]
+        },
+        navComponent : {
+            sidebar : {
+                friends : [{name: 'Alex'},{name: 'Kate'},{name: 'Jora'}]
+            }
+        }
     },
-    profilePage : {
-        newPostMsg : 'Input anything',
-        postsData : [
-            {msg: "jopa", quantityOfLikes: 10},
-            {msg: "Chlen", quantityOfLikes: 100},
-            {msg: "1", quantityOfLikes: 100},
-            {msg: "Chl2222en", quantityOfLikes: 100}
-        ]
+    get state (){
+        return this._state;
     },
-    navComponent : {
-        sidebar : {
-            friends : [{name: 'Alex'},{name: 'Kate'},{name: 'Jora'}]
+    subscribe (observer) {
+        this._callSubscriber = observer;
+    },
+    dispatch(action) {
+        switch(action.type){
+            case 'ADD-POST':
+                const newPost = {
+                    msg: this._state.profilePage.newPostMsg,
+                    quantityOfLikes: 0
+                }
+                this._state.profilePage.postsData.push(newPost);
+                this._state.profilePage.newPostMsg = '';
+                this._callSubscriber(this._state);
+            break;
+
+            case 'UPDATE-NEW-POST-MSG':
+                this._state.profilePage.newPostMsg = action.newPostMsg;
+                this._callSubscriber(this._state);
+            break;
         }
     }
 }
 
-window.state = state;
+window.state = store.state;
 
-export const addPost = () => {
-    const newPost = {
-        msg: state.profilePage.newPostMsg,
-        quantityOfLikes: 0
-    }
-    state.profilePage.postsData.push(newPost);
-    state.profilePage.newPostMsg = '';
-    renderEntireTree();
-}
-
-export const replaceNewPostMsg = msg => {
-    state.profilePage.newPostMsg = msg;
-    renderEntireTree();
-}
-
-export const subscribe = observer => {
-    renderEntireTree = observer;
-}
-
-export default state;
+export default store;

@@ -4,11 +4,11 @@ const FormAddingPost = (props) => {
     const textArea = React.createRef();
 
     const addPost = e => {
-        props.addPost();
+        props.dispatch({type: 'ADD-POST'});
     }
 
     const texareaOnChangeHandler = e => {
-        props.replaceNewPostMsg(textArea.current.value);
+        props.dispatch({type: 'UPDATE-NEW-POST-MSG', newPostMsg: textArea.current.value})
     }
     
     return (
