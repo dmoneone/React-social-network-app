@@ -1,16 +1,24 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG';
+const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
+const SEND_MSG = 'SEND-MSG';
 
 const store = {
     _state: {
         dialogsPage : {
-            dialogData : [
+            newMsg: 'input anythin',
+            chatList : [
                 {name: 'Kurash', id: 1},
                 {name: 'Salo', id: 2},
                 {name: 'Kate', id: 3}
             ],
-            messagesData : [
+            messagesList: [
                 {msg: "Dash pisky ebat?"},
                 {msg: "228"},
                 {msg: "ass"}
+            ],
+            messages : [
+
             ]
         },
         profilePage : {
@@ -50,9 +58,29 @@ const store = {
                 this._state.profilePage.newPostMsg = action.newPostMsg;
                 this._callSubscriber(this._state);
             break;
+            
+            case 'SEND-MSG':
+                const newMsg = {
+                    msg: this._state.dialogsPage.newMsg
+                }
+                this._state.dialogsPage.messages.push(newMsg);
+                this._state.dialogsPage.newMsg = '';
+                this._callSubscriber(this._state);
+            break;
+
+            case 'UPDATE-NEW-MSG':
+                 this._state.dialogsPage.newMsg = action.newMsg;
+                 this._callSubscriber(this._state);
+            break;
         }
     }
 }
+
+
+export const creatorAddPostAction = () => ({type: ADD_POST})
+export const creatorUpdateNewPostMsgAction = (newPostMsg) => ({type: UPDATE_NEW_POST_MSG,newPostMsg: newPostMsg})
+export const creatorUpdateNewMsgAction = (newMsg) => ({type: UPDATE_NEW_MSG,newMsg: newMsg})
+export const creatorSendMsgAction = () => ({type: SEND_MSG})
 
 window.state = store.state;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import FormAddingPost from './Form/Form';
+import PostForm from './PostForm/PostForm';
 
 
 
@@ -12,7 +12,7 @@ const MyPosts = (props) => {
     return (
         <div className={classes.block}>
             <div>
-                <FormAddingPost dispatch={props.dispatch} profilePage={props.profilePage}/>
+                <PostForm dispatch={props.dispatch} profilePage={props.profilePage}/>
             </div>
             
             <div className={classes.new_posts_wrap}>

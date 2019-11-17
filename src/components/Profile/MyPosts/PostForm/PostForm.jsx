@@ -1,14 +1,16 @@
 import React from 'react';
+import {creatorAddPostAction,creatorUpdateNewPostMsgAction} from '../../../../Redux/state'
 
-const FormAddingPost = (props) => {
+
+const PostForm = (props) => {
     const textArea = React.createRef();
 
     const addPost = e => {
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(creatorAddPostAction());
     }
 
     const texareaOnChangeHandler = e => {
-        props.dispatch({type: 'UPDATE-NEW-POST-MSG', newPostMsg: textArea.current.value})
+        props.dispatch(creatorUpdateNewPostMsgAction(textArea.current.value))
     }
     
     return (
@@ -19,4 +21,4 @@ const FormAddingPost = (props) => {
     )
 }
 
-export default FormAddingPost;
+export default PostForm;

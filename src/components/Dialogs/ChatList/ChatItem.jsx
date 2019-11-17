@@ -1,8 +1,8 @@
 import React from 'react';
-import c from './Dialog.module.css';
+import c from './ChatItem.module.css';
 import {NavLink} from 'react-router-dom';
 
-const Dialog = props => {
+const ChatItem = props => {
     const path = "/messages/" + props.id;
     return (
         <div className={c.item}>
@@ -11,4 +11,4 @@ const Dialog = props => {
     )
 }
 
-export default Dialog;
+export default ChatItem;
