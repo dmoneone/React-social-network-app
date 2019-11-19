@@ -1,7 +1,7 @@
 import React from 'react';
 import c from './ChatForm.module.css';
-import {creatorUpdateNewMsgAction,creatorSendMsgAction} from '../../../../Redux/state';
-
+import {creatorUpdateNewMsgAction,creatorSendMsgAction} from '../../../../Redux/DialogsPageReducer';
+//creatorSendMsgAction
 const ChatForm = props => {
     const textarea = React.createRef();
     console.log(props)

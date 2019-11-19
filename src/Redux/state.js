@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG';
-const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
-const SEND_MSG = 'SEND-MSG';
+import dialogsPageReducer from './DialogsPageReducer'
+import profilePageReducer from './ProfilePageReducer'
 
 const store = {
     _state: {
@@ -43,44 +41,13 @@ const store = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        switch(action.type){
-            case 'ADD-POST':
-                const newPost = {
-                    msg: this._state.profilePage.newPostMsg,
-                    quantityOfLikes: 0
-                }
-                this._state.profilePage.postsData.push(newPost);
-                this._state.profilePage.newPostMsg = '';
-                this._callSubscriber(this._state);
-            break;
-
-            case 'UPDATE-NEW-POST-MSG':
-                this._state.profilePage.newPostMsg = action.newPostMsg;
-                this._callSubscriber(this._state);
-            break;
-            
-            case 'SEND-MSG':
-                const newMsg = {
-                    msg: this._state.dialogsPage.newMsg
-                }
-                this._state.dialogsPage.messages.push(newMsg);
-                this._state.dialogsPage.newMsg = '';
-                this._callSubscriber(this._state);
-            break;
-
-            case 'UPDATE-NEW-MSG':
-                 this._state.dialogsPage.newMsg = action.newMsg;
-                 this._callSubscriber(this._state);
-            break;
-        }
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage,action);
+        this._state.profilePage = profilePageReducer(this._state.profilePage,action);
+        this._callSubscriber(this._state);
     }
 }
 
 
-export const creatorAddPostAction = () => ({type: ADD_POST})
-export const creatorUpdateNewPostMsgAction = (newPostMsg) => ({type: UPDATE_NEW_POST_MSG,newPostMsg: newPostMsg})
-export const creatorUpdateNewMsgAction = (newMsg) => ({type: UPDATE_NEW_MSG,newMsg: newMsg})
-export const creatorSendMsgAction = () => ({type: SEND_MSG})
 
 window.state = store.state;
 
