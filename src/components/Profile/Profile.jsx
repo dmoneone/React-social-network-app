@@ -11,6 +11,7 @@ const Profile = (props) => {
             <ProfileInfo/>
             <MyPosts profilePage={props.profilePage}
                      dispatch={props.dispatch}
+                     
             />
         </content>
     );

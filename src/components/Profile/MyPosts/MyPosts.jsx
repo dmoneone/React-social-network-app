@@ -8,7 +8,7 @@ import PostForm from './PostForm/PostForm';
 
 
 const MyPosts = (props) => {
-    const postsJSXData = props.profilePage.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} />))
+    const postsJSXData = props.profilePage.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} dispatch={props.dispatch} />))
     return (
         <div className={classes.block}>
             <div>
