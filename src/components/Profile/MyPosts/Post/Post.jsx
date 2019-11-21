@@ -10,6 +10,7 @@ const Post = props => {
     return (
         <div className={classes.block}>
            <span ref={span_msg}>{props.message}</span>
+            <span>{props.time}</span>
            <div>
                 likes: {props.quantityOfLikes}
                 <button onClick={btnRmvPost}>removePost</button>
