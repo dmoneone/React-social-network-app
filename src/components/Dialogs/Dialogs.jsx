@@ -6,7 +6,6 @@ import Chat from './Chat/Chat';
 
 
 const Dialogs = props => {
-    console.log(props)
     const messagesJSXData = props.dialogsPage.messagesList.map(item => (<Message msg={item.msg} />));
     const chatListJSXData = props.dialogsPage.chatList.map(item => (<ChatItem name={item.name} id={item.id} />));
     return (

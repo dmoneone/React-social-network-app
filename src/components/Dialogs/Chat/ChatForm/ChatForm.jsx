@@ -1,20 +1,21 @@
 import React from 'react';
 import c from './ChatForm.module.css';
-import {creatorUpdateNewMsgAction,creatorSendMsgAction} from '../../../../Redux/DialogsPageReducer';
 //creatorSendMsgAction
 const ChatForm = props => {
     const textarea = React.createRef();
     console.log(props)
-    const sendMsg = () => {
-        props.dispatch(creatorSendMsgAction());
+    const onSendMsg = () => {
+        props.sendMsg();
+        //props.dispatch(creatorSendMsgAction());
     }
     const textAreaOnChangeHandler = () => {
-        props.dispatch(creatorUpdateNewMsgAction(textarea.current.value));
+        props.updateNewMsg(textarea.current.value);
+        //props.dispatch(creatorUpdateNewMsgAction(textarea.current.value));
     }
     return (
         <div>
             <textarea onChange={textAreaOnChangeHandler} ref={textarea} className={c.textarea} value={props.dialogsPage.newMsg}></textarea>
-            <button onClick={sendMsg}>send</button>
+            <button onClick={onSendMsg}>send</button>
         </div>
     )
 }
