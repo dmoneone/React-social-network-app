@@ -1,17 +1,21 @@
 import React from 'react';
 import {creatorUpdateNewMsgAction,creatorSendMsgAction} from '../../../../Redux/DialogsPageReducer';
 import ChatForm from './ChatForm';
-//creatorSendMsgAction
-const ChatFormContainer = props => {
-    const sendMsg = () => {
-        props.dispatch(creatorSendMsgAction());
+import {connect} from 'react-redux';
+
+const mapStateToProps = (state) => ({
+    newMsg: state.dialogsPage.newMsg
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    sendMsg: () => {
+        dispatch(creatorSendMsgAction())
+    },
+    updateNewMsg: (newMsg) => {
+        dispatch(creatorUpdateNewMsgAction(newMsg))
     }
-    const updateNewMsg = (txt) => {
-        props.dispatch(creatorUpdateNewMsgAction(txt));
-    }
-    return (
-        <ChatForm sendMsg={sendMsg} updateNewMsg={updateNewMsg} dialogsPage={props.dialogsPage}/>
-    )
-}
+})
+
+const ChatFormContainer = connect(mapStateToProps,mapDispatchToProps)(ChatForm);
 
 export default ChatFormContainer;

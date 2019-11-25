@@ -4,7 +4,7 @@ import {timeConverter} from './../../../../auxiliaryFunctions/TimeConvertor'
 
 const PostForm = (props) => {
 
-
+    console.log("postform",props)
     const onAddPost = e => {
         let now = Math.floor(Date.now()/1000);
         props.addPost(timeConverter(now));
@@ -18,7 +18,7 @@ const PostForm = (props) => {
     
     return (
         <div>
-            <textarea onChange={texareaOnChangeHandler} cols="30" rows="10" value={props.profilePage.newPostMsg}/>
+            <textarea onChange={texareaOnChangeHandler} cols="30" rows="10" value={props.newPostMsg}/>
             <button onClick={onAddPost}>add</button>
         </div>
     )

@@ -17,23 +17,24 @@ const initialState = {
         {msg: "ass"}
     ],
     messages : [
-
+        {msg: 228}
     ]
 }
 
 const dialogsPageReducer = (state = initialState,action) => {
     switch(action.type){
         case 'SEND-MSG':
-            const newMsg = {
-                msg: state.newMsg
-            }
-            state.messages.push(newMsg);
-            state.newMsg = '';
-        return state;
+        return {
+            ...state,
+            newMsg: '',
+            messages: [...state.messages,{msg: state.newMsg}]
+        }
 
         case 'UPDATE-NEW-MSG':
-            state.newMsg = action.newMsg;
-        return state;
+        return {
+            ...state,
+            newMsg: action.newMsg
+        }
         default: return state;
     }
 }

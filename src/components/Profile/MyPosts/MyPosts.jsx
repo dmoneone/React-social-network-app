@@ -9,12 +9,11 @@ import PostFormConatiner from './PostForm/PostFormContainer';
 
 
 const MyPosts = (props) => {
-    console.log(props,"MyPosts")
-    const postsJSXData = props.profilePage.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} time={item.time} dispatch={props.dispatch} />))
+    const postsJSXData = props.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} time={item.time} dispatch={props.dispatch} />))
     return (
         <div className={classes.block}>
             <div>
-                <PostFormConatiner dispatch={props.dispatch} profilePage={props.profilePage}/>
+                <PostFormConatiner/>
             </div>
             
             <div className={classes.new_posts_wrap}>

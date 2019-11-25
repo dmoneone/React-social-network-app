@@ -19,22 +19,24 @@ const initialState = {
 const profilePageReducer = (state = initialState,action) => {
     switch(action.type){
         case 'ADD-POST':
-            const newPost = {
-                msg: state.newPostMsg,
-                time: action.time,
-                quantityOfLikes: 0
-            }
-            state.postsData.push(newPost);
-            state.newPostMsg = '';
-        return state;
+        return {
+            ...state,
+            newPostMsg: '',
+            postsData: [...state.postsData,{id: action.time, msg: state.newPostMsg, time: action.time, quantityOfLikes: 0}]
+        }
 
         case 'UPDATE-NEW-POST-MSG':
-            state.newPostMsg = action.newPostMsg;
-        return state;
+        return {
+            ...state,
+            newPostMsg: action.newPostMsg
+        }
 
         case 'REMOVE-POST':
-            state.postsData = state.postsData.filter(item => item.msg !== action.msg);
-        return state;
+        const filteredPostsData = state.postsData.filter(item => item.msg !== action.msg);
+        return {
+            ...state,
+            postsData: filteredPostsData
+        }
 
         default: return state;
     }

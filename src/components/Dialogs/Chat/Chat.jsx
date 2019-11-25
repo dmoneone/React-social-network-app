@@ -1,16 +1,15 @@
 import React from 'react';
 import c from './Chat.module.css';
-import ChatForm from './ChatForm/ChatForm';
-import ChatItem from './ChatItem/ChatItem';
 import ChatFormContainer from './ChatForm/ChatFormContainer';
+import ChatItemContainer from './ChatItem/ChatItemContainer';
 const Chat = props => {
     return (
         <div className={c.chat_wrap}>
             <div className={c.chat}>
-                <ChatItem dialogsPage={props.dialogsPage}/>
+                <ChatItemContainer />
             </div>
             <div className={c.form}>
-                <ChatFormContainer dispatch={props.dispatch} dialogsPage={props.dialogsPage} />
+                <ChatFormContainer />
             </div>
         </div>
     )

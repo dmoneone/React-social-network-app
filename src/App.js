@@ -6,18 +6,18 @@ import Profile from './components/Profile/Profile.jsx';
 import Nav from './components/Nav/Nav';
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 const  App = props => {
-  console.log(props)
   return (
     
     <div className="app-wrapper">
       <Header/>
-      <Nav navComponent={props.state.navComponent} />
+      <Nav />
       <div className="main-content">
-        <Route path='/messages' render={()=> <Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />} />
-        <Route path='/profile' render={()=> <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
+        <Route path='/messages' render={()=> <DialogsContainer />} />
+        <Route path='/profile' render={()=> <Profile />}/>
         <Route path='/news' component={News} />
       </div>
     </div>

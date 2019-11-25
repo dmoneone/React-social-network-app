@@ -6,8 +6,8 @@ import Chat from './Chat/Chat';
 
 
 const Dialogs = props => {
-    const messagesJSXData = props.dialogsPage.messagesList.map(item => (<Message msg={item.msg} />));
-    const chatListJSXData = props.dialogsPage.chatList.map(item => (<ChatItem name={item.name} id={item.id} />));
+    const messagesJSXData = props.messagesList.map(item => (<Message msg={item.msg} />));
+    const chatListJSXData = props.chatList.map(item => (<ChatItem name={item.name} id={item.id} />));
     return (
         <content className={classes.content}>
             <div className={classes.contact_list}>
@@ -17,7 +17,7 @@ const Dialogs = props => {
                 { messagesJSXData }
             </div>
             <div className={classes.chat_wrap}>
-                <Chat dialogsPage={props.dialogsPage} dispatch={props.dispatch}/>
+                <Chat />
             </div>
         </content>
     )

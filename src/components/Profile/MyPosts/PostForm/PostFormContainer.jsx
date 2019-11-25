@@ -1,21 +1,20 @@
-import React from 'react';
+
 import {creatorAddPostAction,creatorUpdateNewPostMsgAction} from '../../../../Redux/ProfilePageReducer'
 import PostForm from './PostForm';
+import {connect} from 'react-redux';
 
-const PostFormConatiner = (props) => {
+const mapStateToProps = (state) => ({
+    newPostMsg: state.profilePage.newPostMsg
+});
 
-
-    const addPost = time => {
-        props.dispatch(creatorAddPostAction(time));
+const mapDispatchToProps = dispatch => ({
+    addPost: (time) => {
+        dispatch(creatorAddPostAction(time));
+    },
+    updateNewPost: (txt) => {
+        dispatch(creatorUpdateNewPostMsgAction(txt));
     }
-
-    const updateNewPost = txt => {
-        props.dispatch(creatorUpdateNewPostMsgAction(txt))
-    }
-    
-    return (
-        <PostForm addPost={addPost} updateNewPost={updateNewPost} profilePage={props.profilePage}/>
-    )
-}
+});
+const PostFormConatiner = connect(mapStateToProps,mapDispatchToProps)(PostForm);
 
 export default PostFormConatiner;
