@@ -7,6 +7,8 @@ import Nav from './components/Nav/Nav';
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Users from './components/Users/Users';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 const  App = props => {
@@ -19,6 +21,7 @@ const  App = props => {
         <Route path='/messages' render={()=> <DialogsContainer />} />
         <Route path='/profile' render={()=> <Profile />}/>
         <Route path='/news' component={News} />
+        <Route path='/users' render={()=><UsersContainer/>} />
       </div>
     </div>
   );
