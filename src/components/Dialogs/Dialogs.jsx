@@ -1,13 +1,13 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
-import ChatItem from './ChatList/ChatItem';
+import ChatItemLink from './ChatList/ChatItemLink';
 import Message from './MessagesList/Message';
 import Chat from './Chat/Chat';
 
 
 const Dialogs = props => {
-    const messagesJSXData = props.messagesList.map(item => (<Message msg={item.msg} />));
-    const chatListJSXData = props.chatList.map(item => (<ChatItem name={item.name} id={item.id} />));
+    const messagesJSXData = props.messagesList.map(item => (<Message msg={item.msg} key={item.msg} />));
+    const chatListJSXData = props.chatList.map(item => (<ChatItemLink name={item.name} id={item.id} key={item.id} />));
     return (
         <content className={classes.content}>
             <div className={classes.contact_list}>

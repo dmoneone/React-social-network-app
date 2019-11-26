@@ -4,15 +4,15 @@ const REMOVE_POST = 'REMOVE-POST';
 
 export const creatorAddPostAction = (time) => ({type: ADD_POST,time});
 export const creatorUpdateNewPostMsgAction = (newPostMsg) => ({type: UPDATE_NEW_POST_MSG,newPostMsg});
-export const creatorRemovePostAction = (msg,time) => ({type: REMOVE_POST,msg});
+export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
 
 const initialState = {
     newPostMsg : 'Input anything',
     postsData : [
-        {msg: "jopa", quantityOfLikes: 10, time: 0},
-        {msg: "Chlen", quantityOfLikes: 100, time: 0},
-        {msg: "1", quantityOfLikes: 100},
-        {msg: "Chl2222en", quantityOfLikes: 100, time: 0}
+        {msg: "jopa", quantityOfLikes: 10, time: 8},
+        {msg: "Chlen", quantityOfLikes: 100, time: 9},
+        {msg: "1", quantityOfLikes: 100,time: 22222222222222222},
+        {msg: "Chl2222en", quantityOfLikes: 100, time: 7}
     ]
 }
 

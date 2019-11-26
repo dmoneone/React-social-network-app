@@ -5,7 +5,7 @@ import {creatorRemovePostAction} from '../../../../Redux/ProfilePageReducer';
 const Post = props => {
     const span_msg = React.createRef();
     const btnRmvPost = e => {
-        props.dispatch(creatorRemovePostAction(span_msg.current.textContent));
+        props.dispatch(creatorRemovePostAction(span_msg.current.textContent))
     }
     return (
         <div className={classes.block}>
