@@ -8,9 +8,6 @@ export const setUsercAC = (users) => ({type: SET_USERS, users});
 
 const initialState = {
     users: [
-        {name: 'Dima',id: 1,status: 'Yep!',follow: true},
-        {name: 'Kate',id: 2,status: 'Im a bitch',follow: false},
-        {name: 'Strup',id: 3,status: 'Jopa!',follow: true}
     ]
 }
 
