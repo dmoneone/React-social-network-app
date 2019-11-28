@@ -5,6 +5,7 @@ import {creatorRemovePostAction} from '../../../../Redux/ProfilePageReducer';
 const Post = props => {
     const span_msg = React.createRef();
     const btnRmvPost = e => {
+        //I MUST CLEAN THIS COMPONENT! fffffffffffiiiiiiiiiiiiiixxxxxxxxxxxx
         props.dispatch(creatorRemovePostAction(span_msg.current.textContent))
     }
     return (
