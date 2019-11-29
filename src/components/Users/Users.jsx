@@ -7,7 +7,12 @@ import profilePhotoUndefined from "./../../assets/img/profile_photo_undefined.pn
 class Users extends React.Component {
     constructor(props) {
         super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res=>props.setUsers(res.data.items))
+    }
+    componentDidMount(){
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res=>this.props.setUsers(res.data.items))
+    }
+    componentDidUpdate(){
+        alert('update')
     }
     render() {
         return (
