@@ -1,0 +1,55 @@
+.selected{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+
+.pages li{
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+    font-family: Tahoma;
+    vertical-align: middle;
+}
+
+.pages li:hover{
+    font-size: 25px;
+}
+
+.user{
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: 100px 1fr;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.img_wrap img{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.bio_wrap{
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.name{
+    font-family: Tahoma;
+    font-size: 20px;
+    display: block;
+}
+
+.status{
+    font-family: Arial;
+    font-size: 15px;
+    display: block;
+    padding-top: 5px;
+}
+
+.btn{
+    display: block;
+    margin-top: 20px;
+}
