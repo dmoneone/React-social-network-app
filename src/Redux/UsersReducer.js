@@ -21,6 +21,8 @@ const initialState = {
     pagesQuantity: Number
 }
 
+
+
 const usersPageReducer = (state = initialState,action) => {
     switch(action.type){
         case 'FOLLOW':
@@ -55,14 +57,14 @@ const usersPageReducer = (state = initialState,action) => {
             ...state,
             users: [...action.users]
         }
-
+        
         case 'SET-PAGES-QUANTITY':
 
         return {
             ...state,
             pagesQuantity: action.quantity
         }
-
+        
         case 'SET-CURRENT-PAGE':
         
         return {

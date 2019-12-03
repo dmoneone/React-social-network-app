@@ -3,14 +3,16 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post';
 import PostForm from './PostForm/PostForm';
 import PostFormConatiner from './PostForm/PostFormContainer';
-
+import {creatorRemovePostAction} from './../../../Redux/ProfilePageReducer';
 
 
 
 
 const MyPosts = (props) => {
-    console.log(props,'myPosts')
-    const postsJSXData = props.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} time={item.time} key={item.time} dispatch={props.dispatch}/>))
+    const rmvPost = (i) => {
+        props.dispatch(creatorRemovePostAction(i))
+    }
+    const postsJSXData = props.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} time={item.time} key={item.time} rmvPost={rmvPost}/>))
     return (
         <div className={classes.block}>
             <div>
