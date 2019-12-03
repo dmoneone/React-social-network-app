@@ -4,6 +4,7 @@ const SET_USERS = 'SET-USERS';
 const SET_PAGES_QUANTITY = 'SET-PAGES-QUANTITY';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_USERS_QUANTITY = 'SET-USERS-QUANTITY';
+const SET_FETCHING = 'SET-FETCHING';
 
 export const followAC = (userId) => ({type: FOLLOW, userId});
 export const unfollowAC = (userId) => ({type: UNFOLLOW, userId});
@@ -11,6 +12,7 @@ export const setUsercAC = (users) => ({type: SET_USERS, users});
 export const setPagesQuantityAC = (quantity) => ({type: SET_PAGES_QUANTITY, quantity});
 export const setCurrentPageAC = (c) => ({type: SET_CURRENT_PAGE, c});
 export const setUsersQunatityAC = (q) => ({type: SET_USERS_QUANTITY, q});
+export const setFetchingAC = (bool) => ({type: SET_FETCHING, bool})
 
 const initialState = {
     users: [
@@ -18,7 +20,8 @@ const initialState = {
     usersQuantity: Number,
     usersQuantityOnPage: 30,
     currentPage: 1,
-    pagesQuantity: Number
+    pagesQuantity: Number,
+    isFetching: false
 }
 
 
@@ -77,6 +80,13 @@ const usersPageReducer = (state = initialState,action) => {
         return {
             ...state,
             usersQuantity: action.q
+        }
+
+        case 'SET-FETCHING':
+        
+        return {
+            ...state,
+            isFetching: action.bool
         }
 
         default: return state;

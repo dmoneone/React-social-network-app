@@ -2,8 +2,7 @@ import React from 'react'
 import profilePhotoUndefined from "./../../assets/img/14-1User_1-128.png"
 import c from './Users.module.css';
 
-const UsersFunc = props => {
-    console.log(props)
+const Users = props => {
     const pages = [];
     for (let i = 1; i <= props.pagesQuantity; i++) {
         pages.push(i);
@@ -45,4 +44,4 @@ const UsersFunc = props => {
     )
 }
 
-export default UsersFunc
+export default Users

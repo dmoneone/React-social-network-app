@@ -34,6 +34,8 @@
 .bio_wrap{
     padding: 10px;
     box-sizing: border-box;
+    word-break: break-word;
+    line-height: 1.2;
 }
 
 .name{
