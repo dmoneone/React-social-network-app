@@ -1,6 +1,7 @@
 import React from 'react'
 import profilePhotoUndefined from "./../../assets/img/14-1User_1-128.png"
 import c from './Users.module.css';
+import {NavLink} from 'react-router-dom';
 
 const Users = props => {
     const pages = [];
@@ -23,8 +24,10 @@ const Users = props => {
                        return (
                            <div key={item.id} className={c.user}>
                                <div className={c.img_wrap}>
-                                    <img src={item.photos.small !== null ? item.photos.small : profilePhotoUndefined} alt=""/>
-                               </div>
+                                   <NavLink to={'profile/' + item.id}>
+                                        <img src={item.photos.small !== null ? item.photos.small : profilePhotoUndefined} alt=""/>
+                                   </NavLink>
+                                <div/>
                                <div className={c.bio_wrap}>
                                     <span className={c.name}>{item.name}</span>
                                     <span className={c.status}>{item.status}</span>
@@ -33,6 +36,7 @@ const Users = props => {
                                             <button className={c.btn} onClick={() => props.unfollow(item.id)}>Unfollow</button> : 
                                             <button className={c.btn} onClick={() => props.follow(item.id)}>follow</button>
                                     }
+                                </div>
                                 </div>
                            </div>
                           

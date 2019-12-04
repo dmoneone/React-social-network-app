@@ -6,13 +6,13 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_USERS_QUANTITY = 'SET-USERS-QUANTITY';
 const SET_FETCHING = 'SET-FETCHING';
 
-export const followAC = (userId) => ({type: FOLLOW, userId});
-export const unfollowAC = (userId) => ({type: UNFOLLOW, userId});
-export const setUsercAC = (users) => ({type: SET_USERS, users});
-export const setPagesQuantityAC = (quantity) => ({type: SET_PAGES_QUANTITY, quantity});
-export const setCurrentPageAC = (c) => ({type: SET_CURRENT_PAGE, c});
-export const setUsersQunatityAC = (q) => ({type: SET_USERS_QUANTITY, q});
-export const setFetchingAC = (bool) => ({type: SET_FETCHING, bool})
+export const follow = (userId) => ({type: FOLLOW, userId});
+export const unfollow = (userId) => ({type: UNFOLLOW, userId});
+export const setUsers = (users) => ({type: SET_USERS, users});
+export const setQuantityOfPages = (quantity) => ({type: SET_PAGES_QUANTITY, quantity});
+export const setCurrentPage = (c) => ({type: SET_CURRENT_PAGE, c});
+export const setUsersQunatity = (q) => ({type: SET_USERS_QUANTITY, q});
+export const setFetching = (bool) => ({type: SET_FETCHING, bool})
 
 const initialState = {
     users: [

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setFetchingAC,followAC,unfollowAC,setUsercAC,setPagesQuantityAC,setCurrentPageAC,setUsersQunatityAC} from './../../Redux/UsersReducer';
+import {setFetching,follow,unfollow,setUsers,setQuantityOfPages,setCurrentPage,setUsersQunatity} from './../../Redux/UsersReducer';
 
 import React from 'react';
 import axios from 'axios';
@@ -15,7 +15,7 @@ class UsersGettingAPI extends React.Component {
             .then(res => {
                 this.props.setFetching(false)
                 this.props.setUsers(res.data.items)
-                this.props.setUsersQuantity(res.data.totalCount)
+                this.props.setUsersQunatity(res.data.totalCount)
                 const q = Math.ceil(this.props.usersQuantity / this.props.usersQuantityOnPage);
                 this.props.setQuantityOfPages(q);
             })
@@ -68,7 +68,7 @@ const mapStateToProps = state => ({
     isFetching: state.usersPage.isFetching
 })
 
-const mapDispatchToProps = dispatch => ({
+/*const mapDispatchToProps = dispatch => ({
     follow: (userId) => {
         dispatch(followAC(userId))
     },
@@ -90,8 +90,8 @@ const mapDispatchToProps = dispatch => ({
     setFetching: (bool) => {
         dispatch(setFetchingAC(bool))
     }
-})
+})*/
 
-const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersGettingAPI)
+const UsersContainer = connect(mapStateToProps,{follow,unfollow,setUsers,setQuantityOfPages,setCurrentPage,setUsersQunatity,setFetching})(UsersGettingAPI)
 
 export default UsersContainer;

@@ -1,10 +1,11 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG';
 const REMOVE_POST = 'REMOVE-POST';
-
+const SET_PROFILE = 'SET-PROFILE'
 export const creatorAddPostAction = (time) => ({type: ADD_POST,time});
 export const creatorUpdateNewPostMsgAction = (newPostMsg) => ({type: UPDATE_NEW_POST_MSG,newPostMsg});
 export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
+export const setProfile = profile => ({type: SET_PROFILE,profile})
 
 const initialState = {
     newPostMsg : 'Input anything',
@@ -13,7 +14,8 @@ const initialState = {
         {msg: "Chlen", quantityOfLikes: 100, time: 9},
         {msg: "1", quantityOfLikes: 100,time: 22222222222222222},
         {msg: "Chl2222en", quantityOfLikes: 100, time: 7}
-    ]
+    ],
+    currentProfile: null
 }
 
 const profilePageReducer = (state = initialState,action) => {
@@ -38,6 +40,12 @@ const profilePageReducer = (state = initialState,action) => {
             postsData: filteredPostsData
         }
 
+        case 'SET-PROFILE': {
+            return {
+                ...state,
+                currentProfile: action.profile
+            }
+        }
         default: return state;
     }
 }
