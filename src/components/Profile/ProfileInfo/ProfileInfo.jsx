@@ -7,8 +7,9 @@ const ProfileInfo = props => {
     }
     return (
         <div className={c.block}>
-            ava + descr
-            <img src={props.profile.photos.large}/>
+             <img src={props.profile.photos.large}/>
+             <span>{props.profile.aboutMe}</span>
+             <span>{props.profile.fullName}</span>
         </div>
     )
 }

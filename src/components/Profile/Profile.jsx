@@ -3,6 +3,7 @@ import classes from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 const Profile = (props) => {
+    console.log('prf',props)
     return (
         <content className={classes.content}>
             <div className={classes.main_img}>
