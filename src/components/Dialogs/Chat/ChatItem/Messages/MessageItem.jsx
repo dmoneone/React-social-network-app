@@ -1,8 +1,9 @@
 import React from 'react';
+import c from './MessageItem.module.css'
 
 const MessageItem = props => {
     return (
-        <div>{props.msg}</div>
+        <div className={c.msg}>{props.msg}</div>
     )
 }
 

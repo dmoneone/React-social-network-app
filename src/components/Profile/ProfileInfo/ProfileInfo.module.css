@@ -1,3 +1,22 @@
 .block{
-    
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.name, .about{
+    padding-left: 10px;
+    font-family: Tahoma;
+    display: block;
+}
+
+.name{
+   
+    font-size: 30px;
+}
+
+.about{
+    font-size: 20px;
+    padding-top: 10px;
 }

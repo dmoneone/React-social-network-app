@@ -10,10 +10,10 @@ export const setProfile = profile => ({type: SET_PROFILE,profile})
 const initialState = {
     newPostMsg : 'Input anything',
     postsData : [
-        {msg: "jopa", quantityOfLikes: 10, time: 8},
-        {msg: "Chlen", quantityOfLikes: 100, time: 9},
-        {msg: "1", quantityOfLikes: 100,time: 22222222222222222},
-        {msg: "Chl2222en", quantityOfLikes: 100, time: 7}
+        {msg: "jopa", quantityOfLikes: 10, time: '6 Dec 2019 22:13:20'},
+        {msg: "Chlen", quantityOfLikes: 100, time: '6 Dec 2019 22:13:20'},
+        {msg: "1", quantityOfLikes: 100,time: '6 Dec 2019 22:13:20'},
+        {msg: "Chl2222en", quantityOfLikes: 100, time: '6 Dec 2019 22:13:20'}
     ],
     currentProfile: null
 }

@@ -9,7 +9,7 @@ const Users = props => {
         pages.push(i);
     }
     return (
-        <div>
+        <div className={c.wrap}>
                 <ul className={c.pages}>
                     {   
                         pages.map(p => {
@@ -27,7 +27,7 @@ const Users = props => {
                                    <NavLink to={'profile/' + item.id}>
                                         <img src={item.photos.small !== null ? item.photos.small : profilePhotoUndefined} alt=""/>
                                    </NavLink>
-                                <div/>
+                                </div>
                                <div className={c.bio_wrap}>
                                     <span className={c.name}>{item.name}</span>
                                     <span className={c.status}>{item.status}</span>
@@ -37,7 +37,7 @@ const Users = props => {
                                             <button className={c.btn} onClick={() => props.follow(item.id)}>follow</button>
                                     }
                                 </div>
-                                </div>
+                                
                            </div>
                           
                        )

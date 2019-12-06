@@ -1,6 +1,8 @@
 .content{
     display: block;
     display: grid;
+    padding: 20px;
+    box-sizing: border-box;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "d m"
                        "c c";

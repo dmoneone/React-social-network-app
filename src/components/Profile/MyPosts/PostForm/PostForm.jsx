@@ -1,6 +1,7 @@
 import React from 'react';
 import {creatorAddPostAction,creatorUpdateNewPostMsgAction} from '../../../../Redux/ProfilePageReducer'
 import {timeConverter} from './../../../../auxiliaryFunctions/TimeConvertor'
+import c from './PostForm.module.css'
 
 const PostForm = (props) => {
 
@@ -18,8 +19,8 @@ const PostForm = (props) => {
     
     return (
         <div>
-            <textarea onChange={texareaOnChangeHandler} cols="30" rows="10" value={props.newPostMsg}/>
-            <button onClick={onAddPost}>add</button>
+            <textarea className={c.textarea} onChange={texareaOnChangeHandler} cols="30" rows="10" value={props.newPostMsg}/>
+            <button className={c.add_post_btn} onClick={onAddPost}>add</button>
         </div>
     )
 }

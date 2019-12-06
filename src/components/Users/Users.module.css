@@ -1,3 +1,7 @@
+.wrap{
+    padding: 20px;
+}
+
 .selected{
     font-weight: bold;
     font-size: 25px;
@@ -23,12 +27,19 @@
     grid-template-columns: 100px 1fr;
     padding: 20px;
     box-sizing: border-box;
+    border-top: 1px solid #e7e8ec;
 }
 
 .img_wrap img{
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+    transition: all ease 0.4s;
+    border-radius: 50%;
+}
+
+.img_wrap img:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .bio_wrap{

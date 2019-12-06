@@ -1,7 +1,9 @@
 .textarea{
     width: 100%;
     box-sizing: border-box;
-    resize: none;
+    resize: vertical;
     height: 100px;
     padding: 20px;
+    font-family: Tahoma;
+    border: 1px solid #e7e8ec;
 }

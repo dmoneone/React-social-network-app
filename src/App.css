@@ -42,27 +42,32 @@ table {
 	border-spacing: 0;
 }
 
+a{
+	text-decoration: none;
+}
+
 .app-wrapper{
   display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-auto-rows: minmax(60px, auto);
+  grid-template-columns: 150px 1fr;
+  grid-auto-rows: minmax(50px, auto);
   grid-template-areas: "header header"
                        "nav content";
 }
 
 .main-content{
   grid-area: content;
-  background: rgb(146, 139, 139);
+  background: #fff;
 }
 
 .header{
-  background: lightgrey;
+  background:rgb(32, 35, 42);
   grid-area: header;
   display: grid;
   grid-template-columns: 3fr 1fr;
+  padding-bottom: 2px;
 }
 
 .main-nav{
-  background: rgb(16, 65, 16);
+  background: #282c34;
   grid-area: nav;
 }

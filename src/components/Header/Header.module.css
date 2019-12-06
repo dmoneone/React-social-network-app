@@ -1,6 +1,17 @@
 
 .logo_wrap img{
   width: 50px;
+  transition: all ease 0.4s;
+  box-sizing: border-box;
+}
+
+.logo_wrap{
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.logo_wrap img:hover{
+  transform: rotate(360deg);
 }
 
 
@@ -9,6 +20,36 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.authorized span{
+.authorized, .login{
+  padding-top: 5px;
+  padding-right: 15px;
+  float: right;
+}
+
+.authorized span,.login{
   display: block;
+  color: white;
+  font-family: Tahoma;
+  font-size: 15px;
+}
+
+.authorized .name{
+  font-size: 20px;
+  position: relative;
+  transition: all ease 0.3s;
+}
+
+.authorized .name:before{
+  transition: all ease 0.3s;
+  position: absolute;
+  content: "";
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #fff;
+}
+
+.authorized .name:hover:before{
+  width: 50%;
 }
