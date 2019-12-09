@@ -4,16 +4,16 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import {setProfile} from './../../Redux/ProfilePageReducer'
 import {withRouter} from 'react-router-dom'
+import API from '../../API/api'
 
 class ProfileGettingAPI extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.userId
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${!id ?  this.props.authorized : id}`,{
-            withCredentials: true
-        })
-        .then(res=>{
-            this.props.setProfile(res.data)
-        })
+        API
+          .getUserProfile(id,this.props.authorized)
+          .then(data => {
+            this.props.setProfile(data)
+          })
     }
     render() {
         return (

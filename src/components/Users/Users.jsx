@@ -3,6 +3,7 @@ import profilePhotoUndefined from "./../../assets/img/14-1User_1-128.png"
 import c from './Users.module.css'
 import {NavLink} from 'react-router-dom'
 import axios from  'axios'
+import API from '../../API/api'
 
 const Users = props => {
     const pages = [];
@@ -12,30 +13,23 @@ const Users = props => {
 
 
     const followUser = id => {
-        axios.post('https://social-network.samuraijs.com/api/1.0/follow/'+id,null,{
-            withCredentials: true,
-            headers: {
-                'API-KEY': 'cacb93f0-c6bd-40cd-9b85-22a8768dd33f'
-            }
-        }).then(res => {
-            if(res.data.resultCode === 0) {
-                props.follow(id)
-            }
-        })
-        
+        API
+          .followUser(id)
+          .then(data => {
+                if(data.resultCode === 0) {
+                    props.follow(id)
+                }
+          }) 
     }
 
     const unfollowUser = id => {
-        axios.delete('https://social-network.samuraijs.com/api/1.0/follow/'+id,{
-            withCredentials: true,
-            headers: {
-                'API-KEY': 'cacb93f0-c6bd-40cd-9b85-22a8768dd33f'
-            }
-        }).then(res => {
-            if(res.data.resultCode === 0) {
-                props.unfollow(id)
-            }
-        })
+        API
+          .unfollowUser(id)
+          .then(data => {
+                if(data.resultCode === 0) {
+                    props.unfollow(id)
+                }
+          }) 
     }
     
     return (
