@@ -11,13 +11,14 @@ import Preloader from '../../common/Preloader';
 class UsersGettingAPI extends React.Component {
     componentDidMount(){
         this.props.setFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersQuantityOnPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersQuantityOnPage}`,{
+            withCredentials: true,
+        })
             .then(res => {
                 this.props.setFetching(false)
                 this.props.setUsers(res.data.items)
                 this.props.setUsersQunatity(res.data.totalCount)
-                const q = Math.ceil(this.props.usersQuantity / this.props.usersQuantityOnPage);
-                this.props.setQuantityOfPages(q);
+                console.log(this.props.users)
             })
     }
     componentDidUpdate(){
@@ -27,7 +28,9 @@ class UsersGettingAPI extends React.Component {
     loadUsers = (p) => {
         this.props.setFetching(true)
         this.props.setCurrentPage(p);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.usersQuantityOnPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.usersQuantityOnPage}`,{
+            withCredentials: true,
+        })
         .then(res=>{
             this.props.setFetching(false)
             this.props.setUsers(res.data.items)
@@ -48,7 +51,8 @@ class UsersGettingAPI extends React.Component {
                         users={this.props.users}
                         unfollow={this.props.unfollow}
                         follow={this.props.follow}
-                        
+                        usersQuantity={this.props.usersQuantity}
+                        usersQuantityOnPage={this.props.usersQuantityOnPage}
                     />
                 }   
             </>
@@ -92,6 +96,6 @@ const mapStateToProps = state => ({
     }
 })*/
 
-const UsersContainer = connect(mapStateToProps,{follow,unfollow,setUsers,setQuantityOfPages,setCurrentPage,setUsersQunatity,setFetching})(UsersGettingAPI)
+const UsersContainer = connect(mapStateToProps,{follow,unfollow,setUsers,setCurrentPage,setUsersQunatity,setFetching})(UsersGettingAPI)
 
 export default UsersContainer;

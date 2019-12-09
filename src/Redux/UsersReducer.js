@@ -1,7 +1,6 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
-const SET_PAGES_QUANTITY = 'SET-PAGES-QUANTITY';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_USERS_QUANTITY = 'SET-USERS-QUANTITY';
 const SET_FETCHING = 'SET-FETCHING';
@@ -9,7 +8,6 @@ const SET_FETCHING = 'SET-FETCHING';
 export const follow = (userId) => ({type: FOLLOW, userId});
 export const unfollow = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
-export const setQuantityOfPages = (quantity) => ({type: SET_PAGES_QUANTITY, quantity});
 export const setCurrentPage = (c) => ({type: SET_CURRENT_PAGE, c});
 export const setUsersQunatity = (q) => ({type: SET_USERS_QUANTITY, q});
 export const setFetching = (bool) => ({type: SET_FETCHING, bool})
@@ -35,7 +33,7 @@ const usersPageReducer = (state = initialState,action) => {
                 if (item.id === action.userId) {
                     return {
                         ...item,
-                        follow: true
+                        followed: true
                     }
                 } return item;
             })
@@ -48,7 +46,7 @@ const usersPageReducer = (state = initialState,action) => {
                 if (item.id === action.userId) {
                     return {
                         ...item,
-                        follow: false
+                        followed: false
                     }
                 } return item;
             })
@@ -61,12 +59,6 @@ const usersPageReducer = (state = initialState,action) => {
             users: [...action.users]
         }
         
-        case 'SET-PAGES-QUANTITY':
-
-        return {
-            ...state,
-            pagesQuantity: action.quantity
-        }
         
         case 'SET-CURRENT-PAGE':
         
