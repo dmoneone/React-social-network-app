@@ -1,38 +1,23 @@
 import {connect} from 'react-redux';
-import {setFetching,follow,unfollow,setUsers,setQuantityOfPages,setCurrentPage,setUsersQunatity} from './../../Redux/UsersReducer';
+import {gettingFollow,gettingUnfollow,setCurrentPage,getUsers} from './../../Redux/UsersReducer';
 
 import React from 'react';
-import axios from 'axios';
 import Users from './Users';
 import Preloader from '../../common/Preloader';
-import API from '../../API/api';
 
 
 
 class UsersGettingAPI extends React.Component {
     componentDidMount(){
-        this.props.setFetching(true)
-        API
-          .getUsers(this.props.currentPage,this.props.usersQuantityOnPage)
-          .then(data => {
-                this.props.setFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setUsersQunatity(data.totalCount)    
-          })
+        this.props.getUsers(this.props.currentPage,this.props.usersQuantityOnPage)
     }
     componentDidUpdate(){
         //alert('update')
    
     }
     loadUsers = (p) => {
-        this.props.setFetching(true)
         this.props.setCurrentPage(p);
-        API
-          .getUsers(p,this.props.usersQuantityOnPage)
-          .then(data => {
-                this.props.setFetching(false)
-                this.props.setUsers(data.items)   
-          })
+        this.props.getUsers(p,this.props.usersQuantityOnPage)
 
     }
 
@@ -47,8 +32,8 @@ class UsersGettingAPI extends React.Component {
                         currentPage={this.props.currentPage}
                         loadUsers={this.loadUsers}
                         users={this.props.users}
-                        unfollow={this.props.unfollow}
-                        follow={this.props.follow}
+                        unfollow={this.props.gettingUnfollow}
+                        follow={this.props.gettingFollow}
                         usersQuantity={this.props.usersQuantity}
                         usersQuantityOnPage={this.props.usersQuantityOnPage}
                     />
@@ -94,6 +79,6 @@ const mapStateToProps = state => ({
     }
 })*/
 
-const UsersContainer = connect(mapStateToProps,{follow,unfollow,setUsers,setCurrentPage,setUsersQunatity,setFetching})(UsersGettingAPI)
+const UsersContainer = connect(mapStateToProps,{gettingFollow,gettingUnfollow,setCurrentPage,getUsers})(UsersGettingAPI)
 
 export default UsersContainer;

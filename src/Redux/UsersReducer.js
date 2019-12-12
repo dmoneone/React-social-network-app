@@ -1,3 +1,5 @@
+import API from "../API/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -11,6 +13,44 @@ export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (c) => ({type: SET_CURRENT_PAGE, c});
 export const setUsersQunatity = (q) => ({type: SET_USERS_QUANTITY, q});
 export const setFetching = (bool) => ({type: SET_FETCHING, bool})
+//thunk
+export const gettingFollow = id => {
+    return dispatch => {
+        API
+          .followUser(id)
+          .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(follow(id))
+                }
+          }) 
+    }
+}
+
+export const gettingUnfollow = id => {
+    return dispatch => {
+        API
+          .unfollowUser(id)
+          .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(unfollow(id))
+                }
+          }) 
+    }
+}
+
+
+export const getUsers = (currentPage,usersQuantityOnPage) => {
+    return dispatch => {
+        dispatch(setFetching(true))
+        API
+          .getUsers(currentPage,usersQuantityOnPage)
+          .then(data => {
+                dispatch(setFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setUsersQunatity(data.totalCount))
+          })
+    }
+}
 
 const initialState = {
     users: [

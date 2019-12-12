@@ -2,8 +2,7 @@ import React from 'react'
 import profilePhotoUndefined from "./../../assets/img/14-1User_1-128.png"
 import c from './Users.module.css'
 import {NavLink} from 'react-router-dom'
-import axios from  'axios'
-import API from '../../API/api'
+
 
 const Users = props => {
     const pages = [];
@@ -13,23 +12,11 @@ const Users = props => {
 
 
     const followUser = id => {
-        API
-          .followUser(id)
-          .then(data => {
-                if(data.resultCode === 0) {
-                    props.follow(id)
-                }
-          }) 
+        props.follow(id)
     }
 
     const unfollowUser = id => {
-        API
-          .unfollowUser(id)
-          .then(data => {
-                if(data.resultCode === 0) {
-                    props.unfollow(id)
-                }
-          }) 
+        props.unfollow(id)
     }
     
     return (

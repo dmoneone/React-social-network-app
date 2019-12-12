@@ -1,7 +1,19 @@
-;
+import API from "../API/api"
+
 const USER_AUTH = 'USER-AUTH'
 
 export const setUserAuth = (data) => ({type: USER_AUTH,data})
+//thunk
+
+export const getAuth = () => {
+    return dispatch => {
+        API
+        .authMe('auth/me')
+        .then(data => {
+            dispatch(setUserAuth(data))
+        })
+    }
+}
 
 const initialState = {
    id: null,

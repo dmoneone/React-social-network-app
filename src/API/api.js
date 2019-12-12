@@ -32,6 +32,12 @@ const API = {
         return instance 
             .delete('follow/'+id)
             .then(res =>  res.data)
+    },
+    authMe(authMe) {
+        return instance
+            .get(authMe)
+            .then(res => res.data.data)
+
     }
 }
 
