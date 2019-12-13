@@ -6,6 +6,7 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_USERS_QUANTITY = 'SET-USERS-QUANTITY';
 const SET_FETCHING = 'SET-FETCHING';
+const SET_FOLLOWING_IN_PROGRESS = 'SET-FOLLOWING-IN-PROGRESS';
 
 export const follow = (userId) => ({type: FOLLOW, userId});
 export const unfollow = (userId) => ({type: UNFOLLOW, userId});
@@ -13,27 +14,32 @@ export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (c) => ({type: SET_CURRENT_PAGE, c});
 export const setUsersQunatity = (q) => ({type: SET_USERS_QUANTITY, q});
 export const setFetching = (bool) => ({type: SET_FETCHING, bool})
+export const setFollowingInProgress = (bool,id) => ({type: SET_FOLLOWING_IN_PROGRESS, bool, id})
 //thunk
 export const gettingFollow = id => {
     return dispatch => {
+        dispatch(setFollowingInProgress(true,id))
         API
           .followUser(id)
           .then(data => {
                 if(data.resultCode === 0) {
                     dispatch(follow(id))
                 }
+                dispatch(setFollowingInProgress(false,id))
           }) 
     }
 }
 
 export const gettingUnfollow = id => {
     return dispatch => {
+        dispatch(setFollowingInProgress(true,id))
         API
           .unfollowUser(id)
           .then(data => {
                 if(data.resultCode === 0) {
                     dispatch(unfollow(id))
                 }
+                dispatch(setFollowingInProgress(false,id))
           }) 
     }
 }
@@ -59,7 +65,8 @@ const initialState = {
     usersQuantityOnPage: 30,
     currentPage: 1,
     pagesQuantity: Number,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 
@@ -119,6 +126,15 @@ const usersPageReducer = (state = initialState,action) => {
         return {
             ...state,
             isFetching: action.bool
+        }
+
+        case 'SET-FOLLOWING-IN-PROGRESS': 
+
+        return {
+            ...state,
+            followingInProgress: action.bool ?
+                                 [...state.followingInProgress,action.id] :
+                                 state.followingInProgress.filter(id => id !== action.id)
         }
 
         default: return state;

@@ -36,6 +36,7 @@ class UsersGettingAPI extends React.Component {
                         follow={this.props.gettingFollow}
                         usersQuantity={this.props.usersQuantity}
                         usersQuantityOnPage={this.props.usersQuantityOnPage}
+                        followingInProgress={this.props.followingInProgress}
                     />
                 }   
             </>
@@ -52,7 +53,8 @@ const mapStateToProps = state => ({
     usersQuantity: state.usersPage.usersQuantity,
     currentPage:  state.usersPage.currentPage,
     pagesQuantity: state.usersPage.pagesQuantity,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress
 })
 
 /*const mapDispatchToProps = dispatch => ({
