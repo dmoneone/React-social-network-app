@@ -1,22 +1,22 @@
 import React from 'react'
 import profilePhotoUndefined from "./../../assets/img/14-1User_1-128.png"
 import c from './Users.module.css'
-import {NavLink} from 'react-router-dom'
-
+import {NavLink, Redirect} from 'react-router-dom'
 
 const Users = props => {
-    console.log('dis',props)
     const pages = [];
     for (let i = 1; i <= Math.ceil(props.usersQuantity / props.usersQuantityOnPage); i++) {
         pages.push(i);
     }
-
+   
 
     const followUser = id => {
+     
         props.follow(id)
     }
 
     const unfollowUser = id => {
+     
         props.unfollow(id)
     }
     

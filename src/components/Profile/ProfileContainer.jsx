@@ -20,7 +20,8 @@ class ProfileGettingAPI extends React.Component {
 
 const mapStateToProps = state => ({
     profile: state.profilePage.currentProfile,
-    authorized: state.auth.id
+    authorized: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 const withUrlContainerProfile = withRouter(ProfileGettingAPI)

@@ -36,7 +36,9 @@ const API = {
     authMe(authMe) {
         return instance
             .get(authMe)
-            .then(res => res.data.data)
+            .then(res => {
+                return res.data
+            })
 
     }
 }

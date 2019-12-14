@@ -2,7 +2,7 @@ import API from "../API/api"
 
 const USER_AUTH = 'USER-AUTH'
 
-export const setUserAuth = (data) => ({type: USER_AUTH,data})
+export const setUserAuth = (data) => ({type: USER_AUTH,data: data.data,resultCode: data.resultCode})
 //thunk
 
 export const getAuth = () => {
@@ -28,7 +28,7 @@ const AuthReducer = (state = initialState,action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.resultCode === 0 ? true : false
             }
         }
         default: return state;

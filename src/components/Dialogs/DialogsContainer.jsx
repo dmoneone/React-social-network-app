@@ -3,7 +3,8 @@ import Dialogs from './Dialogs';
 
 const mapStateToProps = (state) => ({
     chatList: state.dialogsPage.chatList,
-    messagesList: state.dialogsPage.messagesList
+    messagesList: state.dialogsPage.messagesList,
+    isAuth: state.auth.isAuth
 })
 const DialogsContainer = connect(mapStateToProps)(Dialogs);
 
