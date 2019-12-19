@@ -78,8 +78,8 @@ const mapStateToProps = state => ({
     setUsersQuantity: (q) => {
         dispatch(setUsersQunatityAC(q))
     },
-    setFetching: (bool) => {
-        dispatch(setFetchingAC(bool))
+    setCurrentPage: (p) => {
+        dispatch(setCurrentPage(p))
     }
 })*/
 

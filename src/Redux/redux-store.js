@@ -6,6 +6,7 @@ import usersPageReducer from './UsersReducer'
 import AuthReducer from './AuthReducer'
 import thunkMiddleware from 'redux-thunk'; 
 import {applyMiddleware} from 'redux'; 
+import NewsReducer from './NewsReducer'
 
 
 const reducers = combineReducers({
@@ -13,7 +14,8 @@ const reducers = combineReducers({
     dialogsPage: dialogsPageReducer,
     navComponent: navComponentReducer,
     usersPage: usersPageReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
+    news: NewsReducer
 })
 
 const store = createStore(reducers,applyMiddleware(thunkMiddleware));

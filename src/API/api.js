@@ -43,4 +43,11 @@ const API = {
     }
 }
 
+export const getNewsAPI = () => {
+    return axios.get('https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=9c77ec0f913b4a999a51f9620bbbc824')
+                .then(res => {
+                    return res.data.articles
+                })
+}
+
 export default API
