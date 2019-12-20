@@ -1,12 +1,18 @@
 import {connect} from 'react-redux';
 import Dialogs from './Dialogs';
 import {withAuthRedirect} from '../../HOCS/withAuthRedirect'
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => ({
     chatList: state.dialogsPage.chatList,
     messagesList: state.dialogsPage.messagesList,
 })
 
-const DialogsContainer = connect(mapStateToProps)(withAuthRedirect(Dialogs));
+//const DialogsContainer = connect(mapStateToProps)(withAuthRedirect(Dialogs));
 
-export default DialogsContainer;
+//export default DialogsContainer;
+
+export default compose(
+    connect(mapStateToProps),
+    withAuthRedirect
+)(Dialogs)
