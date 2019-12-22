@@ -43,10 +43,12 @@ const Users = props => {
                                <div className={c.bio_wrap}>
                                     <span className={c.name}>{item.name}</span>
                                     <span className={c.status}>{item.status}</span>
-                                    {
-                                        item.followed ? 
-                                            <button disabled={props.followingInProgress.some(id => id === item.id)} className={c.btn} onClick={() => unfollowUser(item.id)}>Unfollow</button> : 
-                                            <button disabled={props.followingInProgress.some(id => id === item.id)} className={c.btn} onClick={() => followUser(item.id)}>follow</button>
+                                    {   
+                                        props.isAuth ?
+                                            item.followed ? 
+                                                <button disabled={props.followingInProgress.some(id => id === item.id)} className={c.btn} onClick={() => unfollowUser(item.id)}>Unfollow</button> : 
+                                                <button disabled={props.followingInProgress.some(id => id === item.id)} className={c.btn} onClick={() => followUser(item.id)}>follow</button>
+                                        : null
                                     }
                                 </div>
                                 

@@ -37,6 +37,7 @@ const API = {
         return instance
             .get(authMe)
             .then(res => {
+                console.log(res.data)
                 return res.data
             })
 

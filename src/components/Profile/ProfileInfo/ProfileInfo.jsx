@@ -2,6 +2,7 @@ import React from 'react';
 import c from './ProfileInfo.module.css';
 import Preloader from '../../../common/Preloader';
 import profileImg from '../../../assets/img/14-1User_1-128.png'
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 const ProfileInfo = props => {
     if(!props.profile){
         return <Preloader/>
@@ -14,6 +15,7 @@ const ProfileInfo = props => {
 
             <div>
                 <span className={c.name}>{props.profile.fullName}</span>
+                <ProfileStatus status="darou kak dela" />
                 <span className={c.about}>{props.profile.aboutMe}</span>
              </div>
         </div>
