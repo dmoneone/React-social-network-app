@@ -1,14 +1,16 @@
-import API from "../API/api";
+import API from "../API/api"
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG';
-const REMOVE_POST = 'REMOVE-POST';
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG'
+const REMOVE_POST = 'REMOVE-POST'
 const SET_PROFILE = 'SET-PROFILE'
+const EDIT_STATUS = 'EDIT-STATUS'
 
 export const creatorAddPostAction = (time) => ({type: ADD_POST,time});
 export const creatorUpdateNewPostMsgAction = (newPostMsg) => ({type: UPDATE_NEW_POST_MSG,newPostMsg});
 export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
 export const setProfile = profile => ({type: SET_PROFILE,profile})
+export const editStatus = status => ({type: EDIT_STATUS,status})
 //thunk
 export const getProfile = (id,authorized) => {
     return dispatch => {
@@ -28,7 +30,8 @@ const initialState = {
         {msg: "1", quantityOfLikes: 100,time: '6 Dec 2019 22:13:22'},
         {msg: "Chl2222en", quantityOfLikes: 100, time: '6 Dec 2019 22:13:23'}
     ],
-    currentProfile: null
+    currentProfile: null,
+    status: 'Some Status'
 }
 
 const profilePageReducer = (state = initialState,action) => {
@@ -57,6 +60,13 @@ const profilePageReducer = (state = initialState,action) => {
             return {
                 ...state,
                 currentProfile: action.profile
+            }
+        }
+
+        case 'EDIT-STATUS': {
+            return {
+                ...state,
+                status: action.status
             }
         }
         default: return state;

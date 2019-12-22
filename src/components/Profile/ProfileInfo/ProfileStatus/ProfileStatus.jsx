@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import {editStatus} from '../../../../Redux/ProfilePageReducer'
 
 class ProfileStatus extends React.Component {
     state = {
@@ -14,6 +16,9 @@ class ProfileStatus extends React.Component {
             editMode: false
         })
     }
+    onChangeHandler = (e) => {
+        this.props.editStatus(e.target.value)
+    }
     render() {
         return (
             !this.state.editMode ?
@@ -22,10 +27,14 @@ class ProfileStatus extends React.Component {
             </div>
             :
             <div>
-                <input onBlur={this.toSwitchOffEditMode} type="text" value={this.props.status} autoFocus={true}/>
+                <input onChange={(e)=> this.onChangeHandler(e)} onBlur={this.toSwitchOffEditMode} type="text" value={this.props.status} autoFocus={true}/>
             </div>
         )
     }
 }
 
-export default ProfileStatus
+const mapStateToProps = state => ({
+    status: state.profilePage.status
+})
+
+export default connect(mapStateToProps,{editStatus})(ProfileStatus)
