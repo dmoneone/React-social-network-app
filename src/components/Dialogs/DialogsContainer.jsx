@@ -1,7 +1,7 @@
-import {connect} from 'react-redux';
-import Dialogs from './Dialogs';
+import {connect} from 'react-redux'
+import Dialogs from './Dialogs'
 import {withAuthRedirect} from '../../HOCS/withAuthRedirect'
-import { compose } from 'redux';
+import { compose } from 'redux'
 
 const mapStateToProps = (state) => ({
     chatList: state.dialogsPage.chatList,

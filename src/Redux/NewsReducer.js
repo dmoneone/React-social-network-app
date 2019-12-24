@@ -1,4 +1,4 @@
-import {getNewsAPI} from "../API/api"
+import {News_API} from "../API/api"
 
 const SET_NEWS = 'SET-NEWS'
 const SET_FETCHING = 'SET-FETCHING'
@@ -10,7 +10,8 @@ export const setFetching = (bool) => ({type: SET_FETCHING,bool})
 export const getNews = () => {
     return dispatch => {
         dispatch(setFetching(true))
-        getNewsAPI()
+        News_API
+            .getNews()
             .then(news => {
                 dispatch(setNews(news))
                 dispatch(setFetching(false))

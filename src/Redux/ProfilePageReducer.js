@@ -1,4 +1,4 @@
-import API from "../API/api"
+import {Profile_API} from "../API/api"
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG'
@@ -14,11 +14,31 @@ export const editStatus = status => ({type: EDIT_STATUS,status})
 //thunk
 export const getProfile = (id,authorized) => {
     return dispatch => {
-        API
+        Profile_API
           .getUserProfile(id,authorized)
           .then(data => {
             dispatch(setProfile(data))
           })
+    }
+}
+
+export const getStatus = (id,authorized) => {
+    return dispatch => {
+        Profile_API
+         .getUserStatus(id,authorized)
+         .then(status => {
+             dispatch(editStatus(status))
+         })
+    }
+}
+
+export const setStatus = (status) => {
+    return dispatch => {
+        Profile_API
+         .setUserStatus(status)
+         .then(() => {
+             dispatch(editStatus(status))
+         })
     }
 }
 

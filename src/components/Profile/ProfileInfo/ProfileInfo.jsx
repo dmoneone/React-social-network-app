@@ -15,7 +15,7 @@ const ProfileInfo = props => {
 
             <div>
                 <span className={c.name}>{props.profile.fullName}</span>
-                <ProfileStatus status="darou kak dela" />
+                <ProfileStatus setStatus={props.setStatus} notReadOnly={props.notReadOnly}/>
                 <span className={c.about}>{props.profile.aboutMe}</span>
              </div>
         </div>

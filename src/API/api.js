@@ -8,17 +8,10 @@ const instance = axios.create({
     }
 })
 
-const API = {
+export const Users_API = {
     getUsers(currentPage,usersQuantityOnPage) {
         return instance
             .get(`users?page=${currentPage}&count=${usersQuantityOnPage}`)
-            .then(res => {
-                return res.data
-            })
-    },
-    getUserProfile(id,authorized) {
-        return instance
-            .get(`profile/${!id ? authorized : id}`)
             .then(res => {
                 return res.data
             })
@@ -32,7 +25,32 @@ const API = {
         return instance 
             .delete('follow/'+id)
             .then(res =>  res.data)
+    }
+}
+
+export const Profile_API = {
+    getUserProfile(id,authorized) {
+        return instance
+            .get(`profile/${ !id ? authorized : id }`)
+            .then(res => {
+                return res.data
+            })
     },
+    getUserStatus(id,authorized) {
+        return instance 
+            .get(`profile/status/${ !id ? authorized : id }`)
+            .then(res => {
+                return res.data
+            })
+    },
+    setUserStatus(status) {
+        return instance 
+            .put(`profile/status`, {status})
+            
+    }
+}
+
+export const Auth_API = {
     authMe(authMe) {
         return instance
             .get(authMe)
@@ -44,11 +62,12 @@ const API = {
     }
 }
 
-export const getNewsAPI = () => {
-    return axios.get('https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=9c77ec0f913b4a999a51f9620bbbc824')
-                .then(res => {
-                    return res.data.articles
-                })
+export const News_API = {
+    getNews() {
+        return axios.get('https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=9c77ec0f913b4a999a51f9620bbbc824')
+        .then(res => {
+            return res.data.articles
+        })
+    }
 }
 
-export default API

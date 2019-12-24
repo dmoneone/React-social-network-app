@@ -1,4 +1,4 @@
-import API from "../API/api"
+import {Auth_API} from "../API/api"
 
 const USER_AUTH = 'USER-AUTH'
 
@@ -7,7 +7,7 @@ export const setUserAuth = (data) => ({type: USER_AUTH,data: data.data,resultCod
 
 export const getAuth = () => {
     return dispatch => {
-        API
+        Auth_API
         .authMe('auth/me')
         .then(data => {
             dispatch(setUserAuth(data))

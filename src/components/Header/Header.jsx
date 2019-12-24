@@ -12,7 +12,7 @@ const Header = (props) => {
             <div>
                 {
                     props.authData.isAuth ? 
-                        <NavLink to={'/profile/' + props.authData.id} className={c.authorized}>
+                        <NavLink to={'/profile'} className={c.authorized}>
                             <span>You are authorized:</span>
                             <span className={c.name}>{props.authData.login}</span>
                         </NavLink>
