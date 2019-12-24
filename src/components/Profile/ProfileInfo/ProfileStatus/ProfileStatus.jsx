@@ -17,10 +17,10 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         })
+        this.props.setStatus(this.props.status)
     }
     onChangeHandler = (e) => {
         this.props.editStatus(e.target.value)
-        this.props.setStatus(e.target.value)
     }
     render() {
         if(this.props.notReadOnly) {
