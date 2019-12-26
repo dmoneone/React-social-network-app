@@ -8,6 +8,11 @@ class HeaderGettingAPI extends React.Component{
     componentDidMount() {
         this.props.getAuth()
     }
+    componentDidUpdate() {
+        if(localStorage.getItem('auth') == undefined) {
+            localStorage.setItem('auth', JSON.stringify(this.props.authData));
+        }
+    }
     render(){
         return <Header {...this.props}/>
     }

@@ -9,7 +9,6 @@ import { Redirect } from 'react-router-dom';
 const Dialogs = props => {
     const messagesJSXData = props.messagesList.map(item => (<Message msg={item.msg} key={item.msg} />));
     const chatListJSXData = props.chatList.map(item => (<ChatItemLink name={item.name} id={item.id} key={item.id} />));
-    if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <content className={classes.content}>
             <div className={classes.contact_list}>

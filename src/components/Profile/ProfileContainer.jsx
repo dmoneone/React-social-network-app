@@ -10,12 +10,20 @@ class ProfileGettingAPI extends React.Component {
     componentDidMount() {
         const authorized = this.props.authorized
         const id = this.props.match.params.userId
-        this.props.getProfile(id,authorized)
-        this.props.getStatus(id,authorized)
+        if(this.props.profile !== null) {
+            this.toLoadProfileInfo(id,authorized)
+        } else {
+            const savedAuthInfoByLocalStorage = JSON.parse(localStorage.getItem('auth'))
+            this.toLoadProfileInfo(id,savedAuthInfoByLocalStorage.id)
+        }
         
     }
-    toCompareIds(id1,id2) {
-        if(id2 === undefined && id1) {
+    toLoadProfileInfo(id,authorized) {
+            this.props.getProfile(id,authorized)
+            this.props.getStatus(id,authorized)
+    }
+    toAllowNotReadOnly(id1,id2) {
+        if(id1 && id2 === undefined) {
             return true
         }
         else if(+id1 === +id2) {
@@ -27,7 +35,7 @@ class ProfileGettingAPI extends React.Component {
     }
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} notReadOnly={this.toCompareIds(this.props.authorized,this.props.match.params.userId)}/>
+            <Profile {...this.props} profile={this.props.profile} notReadOnly={this.toAllowNotReadOnly(this.props.authorized,this.props.match.params.userId)}/>
         )
     }
 }
@@ -37,6 +45,7 @@ class ProfileGettingAPI extends React.Component {
 const mapStateToProps = state => ({
     profile: state.profilePage.currentProfile,
     authorized: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 
