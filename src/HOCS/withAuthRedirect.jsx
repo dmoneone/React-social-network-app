@@ -11,7 +11,7 @@ export const withAuthRedirect = Component => {
         render() {
             if(this.props.isAuth === false) {
                 const savedAuthInfoByLocalStorage = JSON.parse(localStorage.getItem('auth'))
-                return !savedAuthInfoByLocalStorage.isAuth && <Redirect to='/login'/>
+                return savedAuthInfoByLocalStorage.isAuth && <Redirect to='/login'/>
                 
             }
             return <Component {...this.props}/>
