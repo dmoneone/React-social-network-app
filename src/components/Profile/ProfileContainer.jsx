@@ -60,5 +60,5 @@ export default ProfileContainer
 export default compose(
     connect(mapStateToProps,{getProfile,getStatus,setStatus}),
     withRouter,
-    //withAuthRedirect
+    withAuthRedirect
 )(ProfileGettingAPI)

@@ -13,7 +13,6 @@ const PostForm = (props) => {
     const texareaOnChangeHandler = e => {
         props.updateNewPost(e.target.value);
     }
-    
     return (
         <div>
             <textarea className={c.textarea} onChange={texareaOnChangeHandler} cols="30" rows="10" value={props.newPostMsg}/>

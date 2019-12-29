@@ -7,6 +7,7 @@ import AuthReducer from './AuthReducer'
 import thunkMiddleware from 'redux-thunk'; 
 import {applyMiddleware} from 'redux'; 
 import NewsReducer from './NewsReducer'
+import { reducer as formReducer } from 'redux-form'
 
 
 const reducers = combineReducers({
@@ -15,7 +16,8 @@ const reducers = combineReducers({
     navComponent: navComponentReducer,
     usersPage: usersPageReducer,
     auth: AuthReducer,
-    news: NewsReducer
+    news: NewsReducer,
+    form: formReducer
 })
 
 const store = createStore(reducers,applyMiddleware(thunkMiddleware));
