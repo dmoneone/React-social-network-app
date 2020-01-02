@@ -8,7 +8,7 @@ export const setUserAuth = (data) => ({type: USER_AUTH,data: data.data,resultCod
 export const getAuth = () => {
     return dispatch => {
         Auth_API
-        .authMe('auth/me')
+        .authMe()
         .then(data => {
             dispatch(setUserAuth(data))
         })

@@ -9,6 +9,7 @@ import Preloader from '../../common/Preloader';
 
 class UsersGettingAPI extends React.Component {
     componentDidMount(){
+        console.log(this.props)
         this.props.getUsers(this.props.currentPage,this.props.usersQuantityOnPage)
     }
     componentDidUpdate(){

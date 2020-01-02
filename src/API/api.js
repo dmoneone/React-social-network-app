@@ -51,9 +51,9 @@ export const Profile_API = {
 }
 
 export const Auth_API = {
-    authMe(authMe) {
+    authMe() {
         return instance
-            .get(authMe)
+            .get('auth/me')
             .then(res => {
                 console.log(res.data)
                 return res.data

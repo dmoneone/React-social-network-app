@@ -1,13 +1,11 @@
 import {Profile_API} from "../API/api"
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG'
 const REMOVE_POST = 'REMOVE-POST'
 const SET_PROFILE = 'SET-PROFILE'
 const EDIT_STATUS = 'EDIT-STATUS'
 
-export const creatorAddPostAction = (time) => ({type: ADD_POST,time});
-export const creatorUpdateNewPostMsgAction = (newPostMsg) => ({type: UPDATE_NEW_POST_MSG,newPostMsg});
+export const creatorAddPostAction = (time,msg) => ({type: ADD_POST,time,msg});
 export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
 export const setProfile = profile => ({type: SET_PROFILE,profile})
 export const editStatus = status => ({type: EDIT_STATUS,status})
@@ -43,7 +41,6 @@ export const setStatus = (status) => {
 }
 
 const initialState = {
-    newPostMsg : 'Input anything',
     postsData : [
         {msg: "jopa", quantityOfLikes: 10, time: '6 Dec 2019 22:13:20'},
         {msg: "Chlen", quantityOfLikes: 100, time: '6 Dec 2019 22:13:21'},
@@ -59,15 +56,9 @@ const profilePageReducer = (state = initialState,action) => {
         case 'ADD-POST':
         return {
             ...state,
-            newPostMsg: '',
-            postsData: [...state.postsData,{id: action.time, msg: state.newPostMsg, time: action.time, quantityOfLikes: 0}]
+            postsData: [...state.postsData,{id: action.time, msg: action.msg, time: action.time, quantityOfLikes: 0}]
         }
 
-        case 'UPDATE-NEW-POST-MSG':
-        return {
-            ...state,
-            newPostMsg: action.newPostMsg
-        }
 
         case 'REMOVE-POST':
         const filteredPostsData = state.postsData.filter(item => item.msg !== action.msg);

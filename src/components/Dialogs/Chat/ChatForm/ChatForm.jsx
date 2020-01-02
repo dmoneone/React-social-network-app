@@ -1,38 +1,30 @@
 import React from 'react';
 import c from './ChatForm.module.css';
-/*
+import { Field,reduxForm } from 'redux-form';
+
 const ChatForm = props => {
-    const textarea = React.createRef();
-    console.log(props)
-    const onSendMsg = () => {
-        props.sendMsg();
-    }
-    const textAreaOnChangeHandler = () => {
-        props.updateNewMsg(textarea.current.value);
-    }
     return (
-        <div>
-            <textarea onChange={textAreaOnChangeHandler} ref={textarea} className={c.textarea} value={props.newMsg}></textarea>
-            <button onClick={onSendMsg}>send</button>
-        </div>
+        <form onSubmit={props.handleSubmit}>
+            <Field component='textarea' name='msg' className={c.textarea}/>
+            <button>Send</button>
+        </form>
     )
 }
-*/
-class ChatForm extends React.Component {
-    textarea = React.createRef();
-    onSendMsg = () => {
-        this.props.sendMsg();
-    }
-    textAreaOnChangeHandler = () => {
-        this.props.updateNewMsg(this.textarea.current.value);
+
+const ChatReduxForm = reduxForm({
+    // a unique name for the form
+    form: 'chat-form'
+  })(ChatForm)
+
+class ChatFormWrap extends React.Component {
+    
+    submit = data => {
+        this.props.sendMsg(data.msg);
     }
     render() {
         return (
-            <div>
-                <textarea onChange={this.textAreaOnChangeHandler} ref={this.textarea} className={c.textarea} value={this.props.newMsg}></textarea>
-                <button onClick={this.onSendMsg}>send</button>
-            </div>
+            <ChatReduxForm onSubmit={this.submit}/>
         )
     }
 }
-export default ChatForm;
+export default ChatFormWrap;

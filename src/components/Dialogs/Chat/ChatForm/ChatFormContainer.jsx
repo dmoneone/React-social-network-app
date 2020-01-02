@@ -1,18 +1,15 @@
 import React from 'react';
-import {creatorUpdateNewMsgAction,creatorSendMsgAction} from '../../../../Redux/DialogsPageReducer';
+import {creatorSendMsgAction} from '../../../../Redux/DialogsPageReducer';
 import ChatForm from './ChatForm';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    newMsg: state.dialogsPage.newMsg
+ 
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    sendMsg: () => {
-        dispatch(creatorSendMsgAction())
-    },
-    updateNewMsg: (newMsg) => {
-        dispatch(creatorUpdateNewMsgAction(newMsg))
+    sendMsg: (newMsg) => {
+        dispatch(creatorSendMsgAction(newMsg))
     }
 })
 

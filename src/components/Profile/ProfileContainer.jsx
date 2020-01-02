@@ -10,11 +10,8 @@ class ProfileGettingAPI extends React.Component {
     componentDidMount() {
         const authorized = this.props.authorized
         const id = this.props.match.params.userId
-        if(this.props.profile !== null) {
+        if(this.props.authorized !== null) {
             this.toLoadProfileInfo(id,authorized)
-        } else {
-            const savedAuthInfoByLocalStorage = JSON.parse(localStorage.getItem('auth'))
-            this.toLoadProfileInfo(id,savedAuthInfoByLocalStorage.id)
         }
         
     }

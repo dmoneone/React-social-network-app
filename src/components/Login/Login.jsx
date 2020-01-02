@@ -1,13 +1,20 @@
 import React from 'react'
-
+import {reset} from 'redux-form';
 import { reduxForm, Field } from 'redux-form'
+import { required,maxLength } from '../../form_validation_checks/formChecks'
+import { Input } from '../FormComponents/FormComponents'
+import { connect } from 'react-redux'
+
+const maxLength15 = maxLength(15)
+const maxLength30 = maxLength(30)
 
 const LoginForm = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="login" component="input" type="text" />
-            <Field name="passwd" component="input" type="password" />
-            <Field name="isSaved" component="input" type="checkbox" />
+            <Field name="login" component={Input} type="text" placeholder='login' validate={[required,maxLength15]}/>
+            <Field name="passwd" component={Input} type="password" placeholder='password'  validate={[required,maxLength30]}/>
+            <Field name="isSaved" component={Input} type="checkbox"/>
             <button>Submit</button>
         </form>
     )
@@ -20,6 +27,7 @@ const LoginReduxForm = reduxForm({
 
   const LoginPage = props => {
     const submit = val => {
+        props.reset('login')
         console.log(val)
     }
     return (
@@ -30,4 +38,6 @@ const LoginReduxForm = reduxForm({
     )
 }
 
-export default LoginPage
+
+
+export default connect(null,{reset})(LoginPage)

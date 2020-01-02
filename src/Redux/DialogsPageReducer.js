@@ -1,11 +1,10 @@
-const UPDATE_NEW_MSG = 'UPDATE-NEW-MSG';
+
 const SEND_MSG = 'SEND-MSG';
 
-export const creatorUpdateNewMsgAction = (newMsg) => ({type: UPDATE_NEW_MSG,newMsg: newMsg})
-export const creatorSendMsgAction = () => ({type: SEND_MSG})
+
+export const creatorSendMsgAction = (newMsg) => ({type: SEND_MSG,newMsg})
 
 const initialState = {
-    newMsg: 'input anythin',
     chatList : [
         {name: 'Kurash', id: 1},
         {name: 'Salo', id: 2},
@@ -26,15 +25,9 @@ const dialogsPageReducer = (state = initialState,action) => {
         case 'SEND-MSG':
         return {
             ...state,
-            newMsg: '',
-            messages: [...state.messages,{msg: state.newMsg}]
+            messages: [...state.messages,{msg: action.newMsg}]
         }
 
-        case 'UPDATE-NEW-MSG':
-        return {
-            ...state,
-            newMsg: action.newMsg
-        }
         default: return state;
     }
 }
