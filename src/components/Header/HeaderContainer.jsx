@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import {connect} from 'react-redux'
-import {getAuth} from '../../Redux/AuthReducer'
+import {getAuth,logout} from '../../Redux/AuthReducer'
 import API from '../../API/api'
 
 class HeaderGettingAPI extends React.Component{
@@ -16,6 +16,6 @@ class HeaderGettingAPI extends React.Component{
 const mapStateToProps = state => ({
     authData: state.auth
 })
-const HeaderContainer = connect(mapStateToProps,{getAuth})(HeaderGettingAPI)
+const HeaderContainer = connect(mapStateToProps,{getAuth,logout})(HeaderGettingAPI)
 
 export default HeaderContainer

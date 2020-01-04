@@ -41,7 +41,7 @@ class ProfileGettingAPI extends React.Component {
 
 const mapStateToProps = state => ({
     profile: state.profilePage.currentProfile,
-    authorized: state.auth.id,
+    authorized: state.auth.userId,
     isAuth: state.auth.isAuth
 })
 

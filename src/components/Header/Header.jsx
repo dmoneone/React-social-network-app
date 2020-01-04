@@ -15,6 +15,7 @@ const Header = (props) => {
                         <NavLink to={'/profile'} className={c.authorized}>
                             <span>You are authorized:</span>
                             <span className={c.name}>{props.authData.login}</span>
+                            <button onClick={() => props.logout() }>Log Out</button>
                         </NavLink>
                         :
                         <NavLink className={c.login} to="/login">Login</NavLink>

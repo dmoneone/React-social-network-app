@@ -59,7 +59,16 @@ export const Auth_API = {
                 return res.data
             })
 
+    },
+    login(email,password,rememberMe = false) {
+        return instance
+            .post('auth/login',{email,password,rememberMe})
+    },
+    logout() {
+        return instance
+            .delete('auth/login')
     }
+    
 }
 
 export const News_API = {

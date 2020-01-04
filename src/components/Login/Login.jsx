@@ -4,17 +4,18 @@ import { reduxForm, Field } from 'redux-form'
 import { required,maxLength } from '../../form_validation_checks/formChecks'
 import { Input } from '../FormComponents/FormComponents'
 import { connect } from 'react-redux'
+import { login, logout} from '../../Redux/AuthReducer'
 
-const maxLength15 = maxLength(15)
-const maxLength30 = maxLength(30)
+const maxLength15 = maxLength(100)
+const maxLength30 = maxLength(50)
 
 const LoginForm = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="login" component={Input} type="text" placeholder='login' validate={[required,maxLength15]}/>
-            <Field name="passwd" component={Input} type="password" placeholder='password'  validate={[required,maxLength30]}/>
-            <Field name="isSaved" component={Input} type="checkbox"/>
+            <Field name="email" component={Input} type="text" placeholder='login' validate={[required,maxLength15]}/>
+            <Field name="password" component={Input} type="password" placeholder='password'  validate={[required,maxLength30]}/>
+            <Field name="rememberMe" component={Input} type="checkbox"/>
             <button>Submit</button>
         </form>
     )
@@ -26,9 +27,10 @@ const LoginReduxForm = reduxForm({
   })(LoginForm)
 
   const LoginPage = props => {
-    const submit = val => {
+    const submit = data => {
         props.reset('login')
-        console.log(val)
+        props.login(data.email, data.password, data.rememberMe)
+        
     }
     return (
         <div>
@@ -40,4 +42,4 @@ const LoginReduxForm = reduxForm({
 
 
 
-export default connect(null,{reset})(LoginPage)
+export default connect(null,{reset,login,logout})(LoginPage)
