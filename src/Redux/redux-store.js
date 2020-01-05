@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import {applyMiddleware} from 'redux'; 
 import NewsReducer from './NewsReducer'
 import { reducer as formReducer } from 'redux-form'
+import AppReducer from './AppReducer'
 
 
 const reducers = combineReducers({
@@ -17,7 +18,8 @@ const reducers = combineReducers({
     usersPage: usersPageReducer,
     auth: AuthReducer,
     news: NewsReducer,
-    form: formReducer
+    form: formReducer,
+    app: AppReducer
 })
 
 const store = createStore(reducers,applyMiddleware(thunkMiddleware));

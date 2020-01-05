@@ -8,11 +8,11 @@ export const setUserAuth = (userId, email, login, resultCode = undefined) => ({ 
 
 export const getAuth = () => {
     return dispatch => {
-        Auth_API
-        .authMe()
-        .then(data => {
-            dispatch(setUserAuth(data.data.id, data.data.email, data.data.login, data.resultCode))
-        })
+        return Auth_API
+            .authMe()
+            .then(data => {
+                dispatch(setUserAuth(data.data.id, data.data.email, data.data.login, data.resultCode))
+            })
     }
 }
 
