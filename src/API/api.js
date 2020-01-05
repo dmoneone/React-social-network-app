@@ -55,7 +55,6 @@ export const Auth_API = {
         return instance
             .get('auth/me')
             .then(res => {
-                console.log(res.data)
                 return res.data
             })
 

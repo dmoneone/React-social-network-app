@@ -10,7 +10,7 @@ import {creatorRemovePostAction} from './../../../Redux/ProfilePageReducer';
 
 const MyPosts = (props) => {
     const rmvPost = (i) => {
-        props.dispatch(creatorRemovePostAction(i))
+        props.removePost(i)
     }
     const postsJSXData = props.postsData.map(item => (<Post message={item.msg} quantityOfLikes={item.quantityOfLikes} time={item.time} key={item.time} rmvPost={rmvPost}/>))
     return (
