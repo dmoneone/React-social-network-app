@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {editStatus} from '../../../../Redux/ProfilePageReducer'
+import {editStatus,setStatus} from '../../../../Redux/ProfilePageReducer'
 
 class ProfileStatus extends React.Component {
     state = {
         editMode: false
     }
-    componentDidMount() {
-    }
+
     toSwitchOnEditMode = () => {
         this.setState({
             editMode: true
@@ -48,4 +47,4 @@ const mapStateToProps = state => ({
     status: state.profilePage.status,
 })
 
-export default connect(mapStateToProps,{editStatus})(ProfileStatus)
+export default connect(mapStateToProps,{editStatus,setStatus})(ProfileStatus)

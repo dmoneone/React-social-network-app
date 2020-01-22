@@ -12,6 +12,7 @@ const PostForm = props => {
     )
 }
 
+
 const PostReduxForm = reduxForm({
     // a unique name for the form
     form: 'post-form'

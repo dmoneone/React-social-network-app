@@ -4,6 +4,7 @@ import {gettingFollow,gettingUnfollow,setCurrentPage,getUsers} from './../../Red
 import React from 'react';
 import Users from './Users';
 import Preloader from '../../common/Preloader';
+import { getUsersSelector } from '../../Redux/Selectors/selectors';
 
 
 
@@ -23,6 +24,7 @@ class UsersGettingAPI extends React.Component {
     }
 
     render() {
+        
         return (
             <>
                 {
@@ -48,17 +50,19 @@ class UsersGettingAPI extends React.Component {
 
 
 
-
-const mapStateToProps = state => ({
-    users: state.usersPage.users,
-    usersQuantityOnPage: state.usersPage.usersQuantityOnPage,
-    usersQuantity: state.usersPage.usersQuantity,
-    currentPage:  state.usersPage.currentPage,
-    pagesQuantity: state.usersPage.pagesQuantity,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
-    isAuth: state.auth.isAuth
-})
+const mapStateToProps = state => {
+ 
+    return {
+        users: getUsersSelector(state),
+        usersQuantityOnPage: state.usersPage.usersQuantityOnPage,
+        usersQuantity: state.usersPage.usersQuantity,
+        currentPage:  state.usersPage.currentPage,
+        pagesQuantity: state.usersPage.pagesQuantity,
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
+    }
+}
 
 /*const mapDispatchToProps = dispatch => ({
     follow: (userId) => {

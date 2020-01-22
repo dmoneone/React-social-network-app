@@ -66,13 +66,15 @@ const initialState = {
     currentPage: 1,
     pagesQuantity: Number,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    
 }
 
 
 
 const usersPageReducer = (state = initialState,action) => {
     switch(action.type){
+
         case 'FOLLOW':
         return {
             ...state,

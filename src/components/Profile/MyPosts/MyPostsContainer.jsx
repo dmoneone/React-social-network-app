@@ -8,8 +8,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    removePost(i) {
-        dispatch(creatorRemovePostAction(i))
+    removePost: (msg) => {
+        dispatch(creatorRemovePostAction(msg))
     }
 })
 

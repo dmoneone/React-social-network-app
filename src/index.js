@@ -9,6 +9,7 @@ import store from './Redux/redux-store';
 import {Provider} from 'react-redux';
 
 
+
 const renderEntireTree = (store) => {
     ReactDOM.render(
         <BrowserRouter>

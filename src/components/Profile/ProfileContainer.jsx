@@ -5,6 +5,7 @@ import {getProfile,getStatus,setStatus} from './../../Redux/ProfilePageReducer'
 import {withRouter} from 'react-router-dom'
 import {withAuthRedirect} from '../../HOCS/withAuthRedirect'
 import { compose } from 'redux'
+import { getProfileFromState, getAuthorizedUserIdFormState, getIsAuthFromState, getProfileSelector } from './../../Redux/Selectors/selectors'
 
 class ProfileGettingAPI extends React.Component {
     componentDidMount() {
@@ -31,6 +32,7 @@ class ProfileGettingAPI extends React.Component {
         }
     }
     render() {
+    
         return (
             <Profile {...this.props} profile={this.props.profile} notReadOnly={this.toAllowNotReadOnly(this.props.authorized,this.props.match.params.userId)}/>
         )
@@ -39,11 +41,14 @@ class ProfileGettingAPI extends React.Component {
 
 
 
-const mapStateToProps = state => ({
-    profile: state.profilePage.currentProfile,
-    authorized: state.auth.userId,
-    isAuth: state.auth.isAuth
-})
+const mapStateToProps = state => {
+
+    return {
+        profile: getProfileSelector(state),
+        authorized: getAuthorizedUserIdFormState(state),
+        isAuth: getIsAuthFromState(state)
+    }
+}
 
 
 
@@ -55,7 +60,7 @@ export default ProfileContainer
 */
 
 export default compose(
-    connect(mapStateToProps,{getProfile,getStatus,setStatus}),
+    connect(mapStateToProps,{getProfile,getStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileGettingAPI)
