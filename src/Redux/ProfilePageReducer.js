@@ -1,45 +1,5 @@
 import {Profile_API} from "../API/api"
 
-const ADD_POST = 'ADD-POST'
-const REMOVE_POST = 'REMOVE-POST'
-const SET_PROFILE = 'SET-PROFILE'
-const EDIT_STATUS = 'EDIT-STATUS'
-
-export const creatorAddPostAction = (time,msg) => ({type: ADD_POST,time,msg});
-export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
-export const setProfile = profile => ({type: SET_PROFILE,profile})
-export const editStatus = status => ({type: EDIT_STATUS,status})
-//thunk
-export const getProfile = (id,authorized) => {
-    return dispatch => {
-        Profile_API
-          .getUserProfile(id,authorized)
-          .then(data => {
-            dispatch(setProfile(data))
-          })
-    }
-}
-
-export const getStatus = (id,authorized) => {
-    return dispatch => {
-        Profile_API
-         .getUserStatus(id,authorized)
-         .then(status => {
-             dispatch(editStatus(status))
-         })
-    }
-}
-
-export const setStatus = (status) => {
-    return dispatch => {
-        Profile_API
-         .setUserStatus(status)
-         .then(() => {
-             dispatch(editStatus(status))
-         })
-    }
-}
-
 const initialState = {
     postsData : [
         {msg: "jopa", quantityOfLikes: 10, time: '6 Dec 2019 22:13:20'},
@@ -53,28 +13,27 @@ const initialState = {
 
 const profilePageReducer = (state = initialState,action) => {
     switch(action.type){
-        case 'ADD-POST':
+        case 'social-network/ProfilePageReducer/ADD-POST':
         return {
             ...state,
             postsData: [...state.postsData,{id: action.time, msg: action.msg, time: action.time, quantityOfLikes: 0}]
         }
 
-
-        case 'REMOVE-POST':
+        case 'social-network/ProfilePageReducer/REMOVE-POST':
         const filteredPostsData = state.postsData.filter(item => item.msg !== action.msg);
         return {
             ...state,
             postsData: filteredPostsData
         }
 
-        case 'SET-PROFILE': {
+        case 'social-network/ProfilePageReducer/SET-PROFILE': {
             return {
                 ...state,
                 currentProfile: action.profile
             }
         }
 
-        case 'EDIT-STATUS': {
+        case 'social-network/ProfilePageReducer/EDIT-STATUS': {
             return {
                 ...state,
                 status: action.status
@@ -82,6 +41,31 @@ const profilePageReducer = (state = initialState,action) => {
         }
         default: return state;
     }
+}
+
+const ADD_POST = 'social-network/ProfilePageReducer/ADD-POST'
+const REMOVE_POST = 'social-network/ProfilePageReducer/REMOVE-POST'
+const SET_PROFILE = 'social-network/ProfilePageReducer/SET-PROFILE'
+const EDIT_STATUS = 'social-network/ProfilePageReducer/EDIT-STATUS'
+
+export const creatorAddPostAction = (time,msg) => ({type: ADD_POST,time,msg});
+export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
+export const setProfile = profile => ({type: SET_PROFILE,profile})
+export const editStatus = status => ({type: EDIT_STATUS,status})
+
+export const getProfile = (id,authorized) => async dispatch => {
+    const data = await Profile_API.getUserProfile(id,authorized)
+    dispatch(setProfile(data))
+}
+
+export const getStatus = (id,authorized) => async dispatch => {
+    const status = await Profile_API.getUserStatus(id,authorized)
+    dispatch(editStatus(status))
+}
+
+export const setStatus = (status) => async dispatch => {
+    await Profile_API.setUserStatus(status)
+    dispatch(editStatus(status))
 }
 
 export default profilePageReducer;

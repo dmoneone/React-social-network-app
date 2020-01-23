@@ -1,45 +1,40 @@
 import {News_API} from "../API/api"
 
-const SET_NEWS = 'SET-NEWS'
-const SET_FETCHING = 'SET-FETCHING'
+const initialState = {
+    news: [],
+    isFetching: false
+}
+ 
+const NewsReducer = (state = initialState,action) => {
+     switch(action.type){
+         case 'social-network/NewsReducer/SET-NEWS': {
+             return {
+                 ...state,
+                 news: action.news
+             }
+         }
+         case 'social-network/NewsReducer/SET-FETCHING': {
+             return {
+                 ...state,
+                 isFetching: action.bool
+             }
+         }
+         default: return state;
+     }
+}
+ 
+
+const SET_NEWS = 'social-network/NewsReducer/SET-NEWS'
+const SET_FETCHING = 'social-network/NewsReducer/SET-FETCHING'
 
 export const setNews = (news) => ({type: SET_NEWS,news})
 export const setFetching = (bool) => ({type: SET_FETCHING,bool})
-//thunk
 
-export const getNews = () => {
-    return dispatch => {
-        dispatch(setFetching(true))
-        News_API
-            .getNews()
-            .then(news => {
-                dispatch(setNews(news))
-                dispatch(setFetching(false))
-            })
-    }
-}
-
-const initialState = {
-   news: [],
-   isFetching: false
-}
-
-const NewsReducer = (state = initialState,action) => {
-    switch(action.type){
-        case 'SET-NEWS': {
-            return {
-                ...state,
-                news: action.news
-            }
-        }
-        case 'SET-FETCHING': {
-            return {
-                ...state,
-                isFetching: action.bool
-            }
-        }
-        default: return state;
-    }
+export const getNews = () => async dispatch => {
+    dispatch(setFetching(true))
+    const news = await News_API.getNews()
+    dispatch(setNews(news))
+    dispatch(setFetching(false))
 }
 
 export default NewsReducer;
