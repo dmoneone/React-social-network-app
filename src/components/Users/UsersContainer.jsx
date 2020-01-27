@@ -23,27 +23,21 @@ class UsersGettingAPI extends React.Component {
 
     }
 
-    render() {
-        
-        return (
-            <>
-                {
-                    this.props.isFetching ? 
-                    <Preloader/> : 
-                    <Users
-                        pagesQuantity={this.props.pagesQuantity}
-                        currentPage={this.props.currentPage}
-                        loadUsers={this.loadUsers}
-                        users={this.props.users}
-                        unfollow={this.props.gettingUnfollow}
-                        follow={this.props.gettingFollow}
-                        usersQuantity={this.props.usersQuantity}
-                        usersQuantityOnPage={this.props.usersQuantityOnPage}
-                        followingInProgress={this.props.followingInProgress}
-                        isAuth={this.props.isAuth}
-                    />
-                }   
-            </>
+    render() {  
+        return (    
+             <Users
+                itemsQuantityInPortion={this.props.itemsQuantityInPortion}
+                currentPage={this.props.currentPage}
+                loadUsers={this.loadUsers}
+                users={this.props.users}
+                unfollow={this.props.gettingUnfollow}
+                follow={this.props.gettingFollow}
+                usersQuantity={this.props.usersQuantity}
+                usersQuantityOnPage={this.props.usersQuantityOnPage}
+                followingInProgress={this.props.followingInProgress}
+                isAuth={this.props.isAuth}
+                isFetching={this.props.isFetching}
+            />
         )
     }
 }
@@ -57,10 +51,10 @@ const mapStateToProps = state => {
         usersQuantityOnPage: state.usersPage.usersQuantityOnPage,
         usersQuantity: state.usersPage.usersQuantity,
         currentPage:  state.usersPage.currentPage,
-        pagesQuantity: state.usersPage.pagesQuantity,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        itemsQuantityInPortion: state.usersPage.itemsQuantityInPortion
     }
 }
 

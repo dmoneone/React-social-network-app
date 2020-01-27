@@ -7,9 +7,9 @@ const initialState = {
     usersQuantity: Number,
     usersQuantityOnPage: 30,
     currentPage: 1,
-    pagesQuantity: Number,
     isFetching: false,
     followingInProgress: [],
+    itemsQuantityInPortion: 7
     
 }
 

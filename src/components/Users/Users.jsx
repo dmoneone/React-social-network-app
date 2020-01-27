@@ -2,6 +2,7 @@ import React from 'react'
 import c from './Users.module.css'
 import Paginator from './Paginator'
 import User from './User'
+import Preloader from '../../common/Preloader'
 
 const Users = props => {
     const followUser = id => {
@@ -17,8 +18,11 @@ const Users = props => {
                     usersQuantityOnPage={props.usersQuantityOnPage}
                     currentPage={props.currentPage} 
                     loadUsers={props.loadUsers}
+                    itemsQuantityInPortion={props.itemsQuantityInPortion}
                 />
                 {
+                   props.isFetching ? 
+                   <Preloader/> : 
                    props.users.map(item => {
                        return (
                            <User 

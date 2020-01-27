@@ -1,4 +1,4 @@
-import {combineReducers,createStore} from 'redux'
+import {combineReducers,createStore, compose} from 'redux'
 import profilePageReducer from './ProfilePageReducer'
 import dialogsPageReducer from './DialogsPageReducer'
 import navComponentReducer from './NavComponentReducer'
@@ -22,9 +22,8 @@ const reducers = combineReducers({
     app: AppReducer
 })
 
-const store = createStore(reducers,applyMiddleware(thunkMiddleware));
-
-
-window.store = store;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
+window.__store__ = store;
 
 export default store;

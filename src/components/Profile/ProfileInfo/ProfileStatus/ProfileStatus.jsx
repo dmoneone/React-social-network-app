@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {editStatus,setStatus} from '../../../../Redux/ProfilePageReducer'
 
-class ProfileStatus extends React.Component {
+export class ProfileStatus extends React.Component {
     state = {
-        editMode: false
+        editMode: false,
+        fakeProp: this.props.fakeProp
     }
 
     toSwitchOnEditMode = () => {
@@ -22,16 +23,12 @@ class ProfileStatus extends React.Component {
         this.props.editStatus(e.target.value)
     }
     render() {
-        if(this.props.notReadOnly) {
+        if(/*this.props.notReadOnly*/true) {
             return (
                 !this.state.editMode ?
-                <div onClick={this.toSwitchOnEditMode}>
-                    <span>{this.props.status}</span>    
-                </div>
+                <span className='test' onClick={this.toSwitchOnEditMode}>{this.props.status}</span>    
                 :
-                <div>
-                    <input onChange={(e)=> this.onChangeHandler(e)} onBlur={this.toSwitchOffEditMode.bind(this)} type="text" value={this.props.status} autoFocus={true}/>
-                </div>
+                <input onChange={(e)=> this.onChangeHandler(e)} onBlur={this.toSwitchOffEditMode.bind(this)} type="text" value={this.props.status} autoFocus={true}/>
             )
         } else {
             return (
