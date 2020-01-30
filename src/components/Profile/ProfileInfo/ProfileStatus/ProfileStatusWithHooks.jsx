@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { connect } from 'react-redux'
 import {editStatus,setStatus} from '../../../../Redux/ProfilePageReducer'
+import c from './../ProfileInfo.module.css'
 
 const ProfileStatusWithHooks = props => {
 
@@ -17,21 +18,21 @@ const ProfileStatusWithHooks = props => {
         props.editStatus(e.target.value)
     }
 
-    if(props.notReadOnly) {
+    if(props.isOwner) {
         return (
             !editMode ?
             <div onClick={toSwitchOnEditMode}>
-                <span>{props.status}</span>    
+                <span className={c.status}>{props.status}</span>    
             </div>
             :
             <div>
-                <input onChange={(e)=> onChangeHandler(e)} onBlur={toSwitchOffEditMode} type="text" value={props.status} autoFocus={true}/>
+                <input className={c.edit_status} onChange={(e)=> onChangeHandler(e)} onBlur={toSwitchOffEditMode} type="text" value={props.status} autoFocus={true}/>
             </div>
         )
     } else {
         return (
             <div>
-                <span>{props.status}</span>    
+                <span className={c.status}>{props.status}</span>    
             </div>
         )
     }

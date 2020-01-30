@@ -11,15 +11,13 @@ class ProfileGettingAPI extends React.Component {
     componentDidMount() {
         const authorized = this.props.authorized
         const id = this.props.match.params.userId
-        this.toLoadProfileInfo(id,authorized)
-
-        
+        this.toLoadProfileInfo(id,authorized)   
     }
     toLoadProfileInfo(id,authorized) {
             this.props.getProfile(id,authorized)
             this.props.getStatus(id,authorized)
     }
-    toAllowNotReadOnly(id1,id2) {
+    isOwner(id1,id2) {
         if(id1 && id2 === undefined) {
             return true
         }
@@ -33,7 +31,7 @@ class ProfileGettingAPI extends React.Component {
     render() {
     
         return (
-            <Profile {...this.props} profile={this.props.profile} notReadOnly={this.toAllowNotReadOnly(this.props.authorized,this.props.match.params.userId)}/>
+            <Profile {...this.props} profile={this.props.profile} isOwner={this.isOwner(this.props.authorized,this.props.match.params.userId)}/>
         )
     }
 }

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import c from './ProfileInfo.module.css';
 import Preloader from '../../../common/Preloader';
 import profileImg from '../../../assets/img/14-1User_1-128.png'
-import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
+import ProfileData from './ProfileData/ProfileData';
+import ProfileDataForm from './ProfileDataForm/ProfileDataForm';
 const ProfileInfo = props => {
+    const [editMode,setEditMode] = useState(false)
     if(!props.profile){
         return <Preloader/>
     }
@@ -12,11 +14,20 @@ const ProfileInfo = props => {
             <div className={c.profile_img}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : profileImg}/>
             </div>
-
+ 
             <div>
-                <span className={c.name}>{props.profile.fullName}</span>
-                <ProfileStatusWithHooks notReadOnly={props.notReadOnly}/>
-                <span className={c.about}>{props.profile.aboutMe}</span>
+                {
+                  props.isOwner && (!editMode ? <button className={c.edit_mode_btn} onClick={() => setEditMode(true)}>edit</button>
+                  : <button  className={c.edit_mode_btn} onClick={() => setEditMode(false)}>leave edit mode</button>)
+
+                }
+                {!editMode ?
+                    <ProfileData 
+                        profile={props.profile}
+                        isOwner={props.isOwner}
+                    />:
+                    <ProfileDataForm initialValues={props.profile}/>
+                }
              </div>
         </div>
     )

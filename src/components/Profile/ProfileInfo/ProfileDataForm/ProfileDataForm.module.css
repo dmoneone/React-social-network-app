@@ -1,0 +1,29 @@
+.field{
+    display: block;
+    padding-top: 15px;
+}
+
+.field span,.field div {
+    display: inline-block;
+}
+
+.field span{
+    font-family: Tahoma;
+}
+
+.field input {
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.form{
+    padding: 10px;
+    display: block;
+}
+
+.save_btn{
+    margin-top: 15px;
+    display: block;
+}
+

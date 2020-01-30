@@ -8,7 +8,7 @@ const Profile = (props) => {
             <div className={classes.main_img}>
                 <img src="https://miro.medium.com/max/3600/1*HSisLuifMO6KbLfPOKtLow.jpeg"/>
             </div>
-            <ProfileInfo profile={props.profile} setStatus={props.setStatus} notReadOnly={props.notReadOnly}/>
+            <ProfileInfo profile={props.profile}  isOwner={props.isOwner}/>
             <MyPostsContainer/>
         </content>
     );

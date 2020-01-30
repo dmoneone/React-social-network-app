@@ -1,7 +1,11 @@
-.from_control {
+.form_control input{
     
 }
 
-.from_control.error input{
-    border: 2px solid red;
+.form_control.error input{
+    border: 1px solid rgb(206, 73, 73);
+}
+
+.span_error{
+    color: rgb(206, 73, 73);
 }

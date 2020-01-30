@@ -47,6 +47,17 @@ export const Profile_API = {
         return instance 
             .put(`profile/status`, {status})
             
+    },
+    setProfile(data) {
+        let payload
+        if(!data.hasOwnProperty('lookingForAJob')){
+            payload = {...data,lookingForAJob: false}
+        } else {
+            payload = data
+        }
+        
+        return instance 
+            .put(`profile`, payload)
     }
 }
 

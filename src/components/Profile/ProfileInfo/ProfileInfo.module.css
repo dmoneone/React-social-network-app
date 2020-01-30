@@ -5,18 +5,54 @@
     box-sizing: border-box;
 }
 
-.name, .about{
-    padding-left: 10px;
-    font-family: Tahoma;
-    display: block;
-}
 
 .name{
-   
     font-size: 30px;
 }
 
-.about{
+.status,.edit_status{
     font-size: 20px;
+    font-family: Tahoma;
+    padding-top: 5px;
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.contacts_wrap,.bio_wrap{
+    display: block;
+    padding: 10px;
+} 
+
+
+
+.bio_wrap span{
+   font-family: Tahoma;
+   display: block;
+}
+.btn_show_hide_contacts{
+
+}
+
+.txt{
     padding-top: 10px;
+    display: block;
+}
+
+.edit_mode_btn{
+    margin-left: 12px;
+    display: block;
+}
+
+.contacts{
+    margin-top: 15px;
+}
+
+.contacts li {
+    padding: 5px;
+    font-family: Tahoma;
+}
+
+.contacts li:first-child {
+    font-weight: bold;
 }

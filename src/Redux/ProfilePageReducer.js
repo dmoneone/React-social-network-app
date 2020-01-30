@@ -29,7 +29,7 @@ const profilePageReducer = (state = initialState,action) => {
         case 'social-network/ProfilePageReducer/SET-PROFILE': {
             return {
                 ...state,
-                currentProfile: action.profile
+                currentProfile: {...state.currentProfile,...action.profile}
             }
         }
 
@@ -58,6 +58,13 @@ export const getProfile = (id,authorized) => async dispatch => {
     dispatch(setProfile(data))
 }
 
+export const saveProfileChanges = (payload) => async dispatch => {
+    const data = await Profile_API.setProfile(payload)
+    if(data.data.resultCode === 0){
+        //dispatch(getProfile)
+    }
+}
+
 export const getStatus = (id,authorized) => async dispatch => {
     const status = await Profile_API.getUserStatus(id,authorized)
     dispatch(editStatus(status))
@@ -67,5 +74,7 @@ export const setStatus = (status) => async dispatch => {
     await Profile_API.setUserStatus(status)
     dispatch(editStatus(status))
 }
+
+
 
 export default profilePageReducer;

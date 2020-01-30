@@ -3,14 +3,12 @@ import {gettingFollow,gettingUnfollow,setCurrentPage,getUsers} from './../../Red
 
 import React from 'react';
 import Users from './Users';
-import Preloader from '../../common/Preloader';
 import { getUsersSelector } from '../../Redux/Selectors/selectors';
 
 
 
 class UsersGettingAPI extends React.Component {
     componentDidMount(){
-        console.log(this.props)
         this.props.getUsers(this.props.currentPage,this.props.usersQuantityOnPage)
     }
     componentDidUpdate(){
