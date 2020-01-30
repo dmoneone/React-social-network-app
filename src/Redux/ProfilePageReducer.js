@@ -29,7 +29,7 @@ const profilePageReducer = (state = initialState,action) => {
         case 'social-network/ProfilePageReducer/SET-PROFILE': {
             return {
                 ...state,
-                currentProfile: {...state.currentProfile,...action.profile}
+                currentProfile: action.profile
             }
         }
 
