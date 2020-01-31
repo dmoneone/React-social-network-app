@@ -29,7 +29,6 @@ class ProfileGettingAPI extends React.Component {
         }
     }
     render() {
-    
         return (
             <Profile {...this.props} profile={this.props.profile} isOwner={this.isOwner(this.props.authorized,this.props.match.params.userId)}/>
         )

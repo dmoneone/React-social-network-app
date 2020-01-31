@@ -1,4 +1,5 @@
 import {Profile_API} from "../API/api"
+import { stopSubmit } from "redux-form";
 
 const initialState = {
     postsData : [
@@ -58,10 +59,14 @@ export const getProfile = (id,authorized) => async dispatch => {
     dispatch(setProfile(data))
 }
 
-export const saveProfileChanges = (payload) => async dispatch => {
+export const saveProfileChanges = (payload) => async (dispatch,getState) => {
     const data = await Profile_API.setProfile(payload)
     if(data.data.resultCode === 0){
-        //dispatch(getProfile)
+        dispatch(getProfile(null,getState().auth.userId))
+    } else {
+        const error_msg = data.data.messages.length > 0 ? data.data.messages[0] : 'Input error'
+        dispatch(stopSubmit('profile-data-form',{_error: error_msg}))
+        return Promise.reject(data.data.messages[0])
     }
 }
 

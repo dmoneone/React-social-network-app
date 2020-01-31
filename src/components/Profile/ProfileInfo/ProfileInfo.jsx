@@ -26,7 +26,11 @@ const ProfileInfo = props => {
                         profile={props.profile}
                         isOwner={props.isOwner}
                     />:
-                    <ProfileDataForm initialValues={props.profile}/>
+                    <ProfileDataForm
+                        initialValues={props.profile}
+                        profile={props.profile}
+                        setEditMode={setEditMode}
+                     />
                 }
              </div>
         </div>

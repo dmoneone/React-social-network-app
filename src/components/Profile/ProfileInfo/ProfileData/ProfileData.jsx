@@ -4,10 +4,6 @@ import c from '../ProfileInfo.module.css';
 
 const ProfileData = props => {
     const [showContacts,setShowContacts] = useState(false)
-    const contacts = []
-    for(const prop in props.profile.contacts) {
-        contacts.push({name: prop,url: props.profile.contacts[prop]})
-    }
     return (
        <>
        <div className={c.bio_wrap}>
@@ -24,13 +20,17 @@ const ProfileData = props => {
                         showContacts && <ul className={c.contacts}>
                         <li>Contacts: </li>
                         {
-                            contacts.map((item,index) => {
-                                const name = item.name[0] !== item.name[0].toLocaleUpperCase()
-                                ? item.name[0].toLocaleUpperCase() + item.name.slice(1) : item.name 
-                                return (
-                                <li key={index + Math.random()}>{name + ': ' + (item.url ? item.url : 'none')}</li>
-                                )
-                            })
+                            Object
+                                .keys(props.profile.contacts)
+                                .map((key,index) => {
+                                    return (
+                                       <li key={index + Math.random()}>
+                                           <span>{key + ': '}</span>
+                                           {props.profile.contacts[key] ?
+                                           <a target="_blank" href={props.profile.contacts[key]}>{props.profile.contacts[key]}</a> : 'none'}
+                                       </li>
+                                    )
+                                })
                         }
                         </ul>
                     }
