@@ -55,11 +55,11 @@ const ProfileDataReduxForm = reduxForm({
 
 const ProfileForm = props => {
     const submit = data => {
-        console.log(data)
         props.saveProfileChanges(data)
             .then(() => {
                 props.setEditMode(false)
             })
+            .catch(er => console.log(er))
     }
     return (
         <div>

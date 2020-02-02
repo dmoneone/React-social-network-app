@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from './Profile'
 import {connect} from 'react-redux'
-import {getProfile,getStatus,setStatus} from './../../Redux/ProfilePageReducer'
+import {getProfile,getStatus,setStatus,updatePhoto} from './../../Redux/ProfilePageReducer'
 import {withRouter} from 'react-router-dom'
 import {withAuthRedirect} from '../../HOCS/withAuthRedirect'
 import { compose } from 'redux'
@@ -30,7 +30,11 @@ class ProfileGettingAPI extends React.Component {
     }
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} isOwner={this.isOwner(this.props.authorized,this.props.match.params.userId)}/>
+            <Profile {...this.props} 
+                profile={this.props.profile}
+                isOwner={this.isOwner(this.props.authorized,this.props.match.params.userId)}
+                updatePhoto={this.props.updatePhoto}
+            />
         )
     }
 }
@@ -56,7 +60,7 @@ export default ProfileContainer
 */
 
 export default compose(
-    connect(mapStateToProps,{getProfile,getStatus}),
+    connect(mapStateToProps,{getProfile,getStatus,updatePhoto}),
     withRouter,
     withAuthRedirect
 )(ProfileGettingAPI)

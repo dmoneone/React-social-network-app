@@ -40,6 +40,12 @@ const profilePageReducer = (state = initialState,action) => {
                 status: action.status
             }
         }
+        case 'social-network/ProfilePageReducer/SAVE-PHOTO' : {
+            return {
+                ...state,
+                currentProfile: {...state.currentProfile,photos: action.photos}
+            }
+        }
         default: return state;
     }
 }
@@ -48,11 +54,13 @@ const ADD_POST = 'social-network/ProfilePageReducer/ADD-POST'
 const REMOVE_POST = 'social-network/ProfilePageReducer/REMOVE-POST'
 const SET_PROFILE = 'social-network/ProfilePageReducer/SET-PROFILE'
 const EDIT_STATUS = 'social-network/ProfilePageReducer/EDIT-STATUS'
+const SAVE_PHOTO = 'social-network/ProfilePageReducer/SAVE-PHOTO'
 
 export const creatorAddPostAction = (time,msg) => ({type: ADD_POST,time,msg});
 export const creatorRemovePostAction = (msg) => ({type: REMOVE_POST,msg});
 export const setProfile = profile => ({type: SET_PROFILE,profile})
 export const editStatus = status => ({type: EDIT_STATUS,status})
+export const savePhoto = photos => ({type: SAVE_PHOTO,photos})
 
 export const getProfile = (id,authorized) => async dispatch => {
     const data = await Profile_API.getUserProfile(id,authorized)
@@ -78,6 +86,13 @@ export const getStatus = (id,authorized) => async dispatch => {
 export const setStatus = (status) => async dispatch => {
     await Profile_API.setUserStatus(status)
     dispatch(editStatus(status))
+}
+
+export const updatePhoto = photo  => async dispatch => {
+    const res = await Profile_API.savePhoto(photo)
+    if(res.data.resultCode === 0) {
+        dispatch(savePhoto(res.data.data.photos))
+    }
 }
 
 

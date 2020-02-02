@@ -9,10 +9,16 @@ const ProfileInfo = props => {
     if(!props.profile){
         return <Preloader/>
     }
+    const onChangeFile = e => {
+        if(e.target.files.length) {
+            props.updatePhoto(e.target.files[0])
+        }
+    }
     return (
         <div className={c.block}>
             <div className={c.profile_img}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : profileImg}/>
+                {props.isOwner && <input type='file' onChange={e => onChangeFile(e)} accept='.jpg,.jpeg,.png'/>}
             </div>
  
             <div>
