@@ -6,17 +6,17 @@ import { Input } from '../FormComponents/FormComponents'
 import { connect } from 'react-redux'
 import { login, logout} from '../../Redux/AuthReducer'
 import { Redirect } from 'react-router-dom';
-
-const maxLength15 = maxLength(100)
-const maxLength30 = maxLength(50)
+import c from './Login.module.scss'
+const maxLength100 = maxLength(100)
+const maxLength50 = maxLength(50)
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="email" component={Input} type="text" placeholder='login' validate={[required,maxLength15]}/>
-            <Field name="password" component={Input} type="password" placeholder='password'  validate={[required,maxLength30]}/>
+            <Field name="email" component={Input} type="text" placeholder='login' validate={[required,maxLength100]}/>
+            <Field name="password" component={Input} type="password" placeholder='password'  validate={[required,maxLength50]}/>
             <Field name="rememberMe" component={Input} type="checkbox"/>
-            {props.error && <span>{props.error}</span>}
+            {props.error && <span className={c.error}>{props.error}</span>}
             <button>Submit</button>
         </form>
     )

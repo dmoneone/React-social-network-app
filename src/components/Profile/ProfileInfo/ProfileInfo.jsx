@@ -18,7 +18,7 @@ const ProfileInfo = props => {
         <div className={c.block}>
             <div className={c.profile_img}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : profileImg}/>
-                {props.isOwner && <input type='file' onChange={e => onChangeFile(e)} accept='.jpg,.jpeg,.png'/>}
+                {props.isOwner && <input  className={c.choose_file_input} type='file' onChange={e => onChangeFile(e)} accept='.jpg,.jpeg,.png'/>}
             </div>
  
             <div>
