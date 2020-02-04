@@ -80,9 +80,9 @@ export const Auth_API = {
             })
 
     },
-    login(email,password,rememberMe = false) {
+    login(email,password,rememberMe = false,captcha = null) {
         return instance
-            .post('auth/login',{email,password,rememberMe})
+            .post('auth/login',{email,password,rememberMe,captcha})
     },
     logout() {
         return instance
@@ -100,3 +100,8 @@ export const News_API = {
     }
 }
 
+export const Security_API = {
+    getCaptcha() {
+        return instance.get('security/get-captcha-url')
+    }
+}

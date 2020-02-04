@@ -54,7 +54,7 @@ const AppContainer = compose(
   connect(mapStateToProps,{getInitialization})
 )(App);
 
-const SocialNetworkApp = () => {
+const SocialNetworkApp = props => {
   return (
       <BrowserRouter>
           <Provider store={store}>
