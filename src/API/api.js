@@ -4,7 +4,7 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': 'cacb93f0-c6bd-40cd-9b85-22a8768dd33f'
+        'API-KEY': '62b7d80a-d9a6-4291-984d-3406087f0afc'
     }
 })
 
@@ -103,5 +103,20 @@ export const News_API = {
 export const Security_API = {
     getCaptcha() {
         return instance.get('security/get-captcha-url')
+    }
+}
+
+export const ToDoList_API = {
+    getToDoList() {
+        return instance.get('todo-lists')
+    },
+    addToDoListItem(title) {
+        return instance.post('todo-lists',{title}).then(res => res.data)
+    },
+    removeToDoListItem(id) {
+        return instance.delete('todo-lists/' + id)
+    },
+    updateToDoListItem(title,id) {
+        return instance.put('todo-lists/' + id,{title}).then(res => res.data)
     }
 }

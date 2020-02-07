@@ -10,6 +10,7 @@ const Nav = props => {
                 <li className={classes.item}><NavLink to="/messages" activeClassName={classes.active}>Messages</NavLink></li>
                 <li className={classes.item}><NavLink to="/news" activeClassName={classes.active}>News</NavLink></li>
                 <li className={classes.item}><NavLink to="/users" activeClassName={classes.active}>Users</NavLink></li>
+                <li className={classes.item}><NavLink to="/toDo-list" activeClassName={classes.active}>ToDo List</NavLink></li>
                 <li className={classes.item}>Music</li>
                 <li className={classes.item}>Settings</li>
             </ul>

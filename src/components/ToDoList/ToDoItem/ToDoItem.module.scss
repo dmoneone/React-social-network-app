@@ -1,0 +1,24 @@
+.item{
+    padding: 7px;
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    position: relative;
+    margin: 10px;
+    display: block;
+    span{
+        font-family: Tahoma;
+        padding: 5px;
+        border-radius: 3px;
+        display: block;
+    }
+    .rmv_btn,.edit_mode_btn{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+    }
+    .rmv_btn{
+        right: 80px;
+    }
+}

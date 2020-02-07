@@ -9,6 +9,7 @@ import {applyMiddleware} from 'redux';
 import NewsReducer from './NewsReducer'
 import { reducer as formReducer } from 'redux-form'
 import AppReducer from './AppReducer'
+import TodoListReducer from './TodoListReducer'
 
 
 const reducers = combineReducers({
@@ -19,7 +20,8 @@ const reducers = combineReducers({
     auth: AuthReducer,
     news: NewsReducer,
     form: formReducer,
-    app: AppReducer
+    app: AppReducer,
+    toDoList: TodoListReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

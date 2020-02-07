@@ -15,7 +15,9 @@ const ProfileStatusWithHooks = props => {
         props.setStatus(props.status)
     }
     const onChangeHandler = (e) => {
-        props.editStatus(e.target.value)
+        if(e.target.value.length <= 300) {
+            props.editStatus(e.target.value)
+        }
     }
 
     if(props.isOwner) {

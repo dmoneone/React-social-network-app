@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Switch, Redirect} from 'react-router-dom';
 import './App.css'
 import Nav from './components/Nav/Nav';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -16,8 +16,10 @@ import {BrowserRouter,Route} from 'react-router-dom';
 import store from './Redux/redux-store';
 import {Provider} from 'react-redux';
 import { withSuspense } from './HOCS/withSuspense';
+//import ToDoListContainer from './components/ToDoList/ToDoListContainer';
 const LoginPage = React.lazy(() => import('./components/Login/Login'))
 const NewsContainer = React.lazy(() => import('./components/News/NewsContainer'))
+const ToDoListContainer = React.lazy(() => import('./components/ToDoList/ToDoListContainer') )
 class App extends React.Component {
   componentDidMount() {
     this.props.getInitialization()
@@ -31,11 +33,16 @@ class App extends React.Component {
           <HeaderContainer/>
           <Nav />
           <div className="main-content">
-            <Route path='/messages' render={()=> <DialogsContainer />} />
-            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-            <Route path='/news' render={withSuspense(NewsContainer)} />
-            <Route path='/users' render={()=> <UsersContainer/>} />
-            <Route path='/login' render={withSuspense(LoginPage)} />
+            <Switch>
+              <Route path='/messages' render={()=> <DialogsContainer />} />
+              <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+              <Route path='/news' render={withSuspense(NewsContainer)} />
+              <Route path='/users' render={()=> <UsersContainer/>} />
+              <Route path='/toDo-list' render={withSuspense(ToDoListContainer)} />
+              <Route path='/login' render={withSuspense(LoginPage)} />
+              <Route path='/' exact><Redirect to='/profile'/></Route>
+              <Route path='*' render={() => <div>404</div>} />
+            </Switch>
           </div>
         </div>
       )

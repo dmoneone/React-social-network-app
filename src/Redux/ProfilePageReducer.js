@@ -84,8 +84,17 @@ export const getStatus = (id,authorized) => async dispatch => {
 }
 
 export const setStatus = (status) => async dispatch => {
-    await Profile_API.setUserStatus(status)
-    dispatch(editStatus(status))
+    const res = await Profile_API.setUserStatus(status)
+    switch(res.data.resultCode) {
+        case 0: {
+            dispatch(editStatus(status))
+            break
+        }
+        case 1: {
+            debugger
+            break
+        }
+    }
 }
 
 export const updatePhoto = photo  => async dispatch => {

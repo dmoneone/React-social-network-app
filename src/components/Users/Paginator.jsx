@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import c from './Users.module.css'
+import cn from 'classnames'
 
 const Paginator = React.memo(props => {
     const pages = [];
@@ -20,7 +21,11 @@ const Paginator = React.memo(props => {
                 .filter(p => p >= leftBorderPositionOfPortion && p <= rightBorderPositionOfPortion)
                 .map(p => {
                     return (
-                        <li key={p} onClick={e => props.loadUsers(p)} className={p === props.currentPage ? c.selected : null}>{p}</li>
+                        <li key={p} 
+                         onClick={e => props.loadUsers(p)}
+                         className={ cn({[c.selected]: p === props.currentPage})}>
+                             {p}
+                        </li>
                     )
                 })
             }
