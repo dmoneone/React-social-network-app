@@ -22,7 +22,6 @@ const ToDoItem = React.memo(props => {
     const [editMode,setEditMode] = useState(false)
 
     const saveUpdatedItem = data => {
-        alert()
         updateToDoListItem(data.title,item.id)
         setEditMode(false)
     }
@@ -30,6 +29,7 @@ const ToDoItem = React.memo(props => {
         <>
             <li className={c.item}>
                 {!editMode && <span>{item.title}</span>}
+                {!editMode && <span>{item.addedDate}</span>}
                 {editMode && <UpdateItemReduxForm onSubmit={saveUpdatedItem} initialValues={{title: item.title}}/>}
                 <div>
                     <button 

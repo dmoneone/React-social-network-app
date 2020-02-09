@@ -1,12 +1,14 @@
 import React from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field} from 'redux-form'
 import { Input } from '../FormComponents/FormComponents'
 import ToDoItem from './ToDoItem/ToDoItem'
-
+import { maxLength,required } from '../../form_validation_checks/formChecks'
+const maxLength100 = maxLength(100)
 const ToDoForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="title" component={Input} type="text" placeholder='title' validate={[]}/>
+            <Field name="title" component={Input} type="text" placeholder='title' validate={[maxLength100,required]}/>
+            {props.error && <span>{props.error}</span>}
             <button>add</button>
         </form>
     )
@@ -18,9 +20,11 @@ const ToDoReduxForm = reduxForm({
 })(ToDoForm)
 
 const ToDoList = React.memo(props => {
-    const {list,addNewToDoListItem,removeToDoListItem,updateToDoListItem} = props
+    const {list,addNewToDoListItem,removeToDoListItem,updateToDoListItem,reset} = props
     const onSubmit = data => {
         addNewToDoListItem(data.title)
+        reset('toDo-list-form')
+
     }
 
     return (

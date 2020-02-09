@@ -1,8 +1,10 @@
 import { ToDoList_API } from "../API/api"
 import { updateObjectInArray } from "./object-helpers"
+import { stopSubmit } from "redux-form"
 
 const initialState = {
-    todoList: []
+    todoList: [],
+    error: null
 }
 
 const todoListReducer = (state = initialState,action) => {
@@ -52,7 +54,6 @@ const removeItem = (id) => ({
     type: REMOVE_ITEM,
     id
 })
-
 const updateItem = (id,title) => ({
     type: UPDATE_ITEM,
     id,
@@ -68,8 +69,16 @@ export const getToDoList = () => async dispatch => {
 
 export const addNewToDoListItem = (title) => async dispatch => {
     const res = await ToDoList_API.addToDoListItem(title)
-    if(res.resultCode === 0) {
-        dispatch(saveNewItem(res.data.item))
+    switch(res.resultCode) {
+        case 0: {
+            dispatch(saveNewItem(res.data.item))
+            break
+        }
+        case 1: {
+            const error_msg = res.messages.length > 0 ? res.messages[0] : 'some error'
+            dispatch(stopSubmit('toDo-list-form',{_error: error_msg}))
+            break
+        }
     }
 }
 
