@@ -4,7 +4,9 @@ const initialState = {
     initialization: false
 }
 
-const AppReducer = (state = initialState,action) => {
+type StateType = typeof initialState
+
+const AppReducer = (state: StateType = initialState,action: any): StateType => {
     switch(action.type){
         case 'social-network/AppReducer/SET-INITIALISATION': {
             return {
@@ -16,13 +18,17 @@ const AppReducer = (state = initialState,action) => {
     }
 }
 
-const SET_INITIALISATION = 'social-network/AppReducer/SET-INITIALISATION'
+const SET_INITIALISATION: string = 'social-network/AppReducer/SET-INITIALISATION'
 
-const setInitialization = () => ({
+type SetInitializationActionType = {
+    type: typeof SET_INITIALISATION
+}
+
+const setInitialization = (): SetInitializationActionType  => ({
     type: SET_INITIALISATION
 })
 
-export const getInitialization = () => async dispatch => {
+export const getInitialization = () => async (dispatch: Function) => {
     const promise = dispatch(getAuth())
     await Promise.all([promise])
     dispatch(setInitialization())

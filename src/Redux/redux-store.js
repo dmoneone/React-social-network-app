@@ -1,15 +1,15 @@
 import {combineReducers,createStore, compose} from 'redux'
-import profilePageReducer from './ProfilePageReducer'
+import profilePageReducer from './ProfilePageReducer.ts'
 import dialogsPageReducer from './DialogsPageReducer'
 import navComponentReducer from './NavComponentReducer'
-import usersPageReducer from './UsersReducer'
-import AuthReducer from './AuthReducer'
+import usersPageReducer from './UsersReducer.ts'
+import AuthReducer from './AuthReducer.ts'
 import thunkMiddleware from 'redux-thunk'; 
 import {applyMiddleware} from 'redux'; 
-import NewsReducer from './NewsReducer'
+import NewsReducer from './NewsReducer.ts'
 import { reducer as formReducer } from 'redux-form'
-import AppReducer from './AppReducer'
-import TodoListReducer from './TodoListReducer'
+import AppReducer from './AppReducer.ts'
+import TodoListReducer from './TodoListReducer.ts'
 
 
 const reducers = combineReducers({
