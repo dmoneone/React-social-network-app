@@ -13,6 +13,8 @@
         display: block;
     }
     .rmv_btn,.edit_mode_btn{
+        padding: 5px;
+        font-size: 13px;
         position: absolute;
         top: 5px;
         right: 5px;
@@ -22,3 +24,4 @@
         right: 80px;
     }
 }
+

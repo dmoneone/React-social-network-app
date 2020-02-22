@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { Input } from '../../FormComponents/FormComponents'
 import c from './ToDoItem.module.scss'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button'
 
 const UpdateItemForm = (props) => {
     return (
@@ -32,14 +34,16 @@ const ToDoItem = React.memo(props => {
                 {!editMode && <span>{item.addedDate}</span>}
                 {editMode && <UpdateItemReduxForm onSubmit={saveUpdatedItem} initialValues={{title: item.title}}/>}
                 <div>
-                    <button 
+                    <Button 
+                        variant='danger'
                         onClick={() => removeToDoListItem(item.id) }
                         className={c.rmv_btn}
-                    >remove</button>
-                    <button 
+                    >remove</Button>
+                    <Button 
+                        variant='primary'
                         className={c.edit_mode_btn}
                         onClick={() => editMode ? setEditMode(false) : setEditMode(true)}
-                    >editMode</button>
+                    >editMode</Button>
                 </div>
             </li>
         </>

@@ -11,7 +11,7 @@ const store = {
                 {name: 'Kate', id: 3}
             ],
             messagesList: [
-                {msg: "Dash pisky ebat?"},
+                {msg: "ggggg"},
                 {msg: "228"},
                 {msg: "ass"}
             ],
@@ -22,10 +22,10 @@ const store = {
         profilePage : {
             newPostMsg : 'Input anything',
             postsData : [
-                {msg: "jopa", quantityOfLikes: 10},
-                {msg: "Chlen", quantityOfLikes: 100},
-                {msg: "1", quantityOfLikes: 100},
-                {msg: "Chl2222en", quantityOfLikes: 100}
+                {msg: "jggggggopa", quantityOfLikes: 10},
+                {msg: "ggggg", quantityOfLikes: 100},
+                {msg: "mmmm", quantityOfLikes: 100},
+                {msg: "hhhh", quantityOfLikes: 100}
             ]
         },
         navComponent : {

@@ -1,0 +1,22 @@
+.toDo_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px 10px 60px 10px;
+    box-sizing: border-box;
+    input[type='text'] {
+        padding: 5px;
+        width: 100%;
+    }
+    button {
+        
+    }
+}
+
+.nav_list {
+    span {
+        display: flex;
+        flex-direction: column;
+        word-break: break-all;
+    }
+}

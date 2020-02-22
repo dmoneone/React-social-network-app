@@ -2,14 +2,14 @@ import {Profile_API} from "../API/api"
 import { stopSubmit } from "redux-form";
 
 type ContactsType = {
-    facebook: string | null
-    website: string | null
-    vk: string | null
-    twitter: string | null
-    instagram: string | null
-    youtube: string | null
-    github: string | null
-    mainLink: string | null
+    facebook: string
+    website: string 
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
 }
 
 export type PhotosType = {
