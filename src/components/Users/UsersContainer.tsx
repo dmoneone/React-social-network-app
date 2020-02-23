@@ -1,24 +1,40 @@
 import {connect} from 'react-redux';
-import {gettingFollow,gettingUnfollow,setCurrentPage,getUsers} from './../../Redux/UsersReducer';
-
+import {gettingFollow,gettingUnfollow,setCurrentPage,getUsers,UserType} from '../../Redux/UsersReducer';
+import { GlobalStateType } from '../../Redux/redux-store'
 import React from 'react';
 import Users from './Users';
 import { getUsersSelector } from '../../Redux/Selectors/selectors';
 
+type MapStateToPropsType = {
+    users: Array<UserType>
+    usersQuantityOnPage: number
+    usersQuantity: number
+    currentPage:  number
+    isFetching: boolean
+    followingInProgress: Array<number>
+    isAuth: boolean
+    itemsQuantityInPortion: number
+}
 
+type MapDispatchToPropType = {
+    getUsers: (currentPage: number ,usersQuantityOnPage: number) => void
+    setCurrentPage: (c: number) => void
+    gettingFollow: (id: number) => void
+    gettingUnfollow: (id: number) => void
+}
 
-class UsersGettingAPI extends React.Component {
+type PropsType = MapStateToPropsType & MapDispatchToPropType
+
+class UsersContainer extends React.Component<PropsType,{}> {
     componentDidMount(){
         this.props.getUsers(this.props.currentPage,this.props.usersQuantityOnPage)
     }
     componentDidUpdate(){
-        //alert('update')
-   
+        console.log(this.props)
     }
-    loadUsers = (p) => {
+    loadUsers = (p: number) => {
         this.props.setCurrentPage(p);
         this.props.getUsers(p,this.props.usersQuantityOnPage)
-
     }
 
     render() {  
@@ -42,8 +58,7 @@ class UsersGettingAPI extends React.Component {
 
 
 
-const mapStateToProps = state => {
- 
+const mapStateToProps = (state: GlobalStateType): MapStateToPropsType => {
     return {
         users: getUsersSelector(state),
         usersQuantityOnPage: state.usersPage.usersQuantityOnPage,
@@ -80,6 +95,5 @@ const mapStateToProps = state => {
     }
 })*/
 
-const UsersContainer = connect(mapStateToProps,{gettingFollow,gettingUnfollow,setCurrentPage,getUsers})(UsersGettingAPI)
+export default connect<MapStateToPropsType,MapDispatchToPropType,{/* own props */},GlobalStateType>(mapStateToProps,{gettingFollow,gettingUnfollow,setCurrentPage,getUsers})(UsersContainer)
 
-export default UsersContainer;

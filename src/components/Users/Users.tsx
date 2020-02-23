@@ -3,12 +3,27 @@ import c from './Users.module.css'
 import Paginator from './Paginator'
 import User from './User'
 import Preloader from '../../common/Preloader'
+import { UserType } from '../../Redux/UsersReducer'
 
-const Users = props => {
-    const followUser = id => {
+type PropsType = {
+    itemsQuantityInPortion: number
+    currentPage: number
+    loadUsers: (p: number) => void
+    users: Array<UserType>
+    unfollow: (id: number) => void
+    follow: (Id: number) => void
+    usersQuantity: number
+    usersQuantityOnPage: number
+    followingInProgress: Array<number>
+    isAuth: boolean
+    isFetching: boolean
+}
+
+const Users: React.FC<PropsType> = props => {
+    const followUser = (id: number) => {
         props.follow(id)
     }
-    const unfollowUser = id => {
+    const unfollowUser = (id: number) => {
         props.unfollow(id)
     }
     return (

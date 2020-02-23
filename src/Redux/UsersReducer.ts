@@ -2,7 +2,7 @@ import {Users_API} from "../API/api";
 import { updateObjectInArray } from "./object-helpers";
 import { PhotosType} from './ProfilePageReducer'
 
-type UserType = {
+export type UserType = {
     name: string
     id: number
     uniqueUrlName: string | null
@@ -13,7 +13,7 @@ type UserType = {
 
 const initialState = {
     users: [] as Array<UserType>,
-    usersQuantity: null as number | null,
+    usersQuantity: 0,
     usersQuantityOnPage: 30,
     currentPage: 1,
     isFetching: false,
@@ -97,7 +97,7 @@ type SetUsersActionType = {
     users: Array<UserType>
 }
 
-type SetCurrentPageActionType = {
+export type SetCurrentPageActionType = {
     type: typeof SET_CURRENT_PAGE
     c: number
 }

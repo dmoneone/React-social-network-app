@@ -1,9 +1,18 @@
 import React from 'react'
 import c from './Users.module.css'
-import {NavLink, Redirect} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import profilePhotoUndefined from "./../../assets/img/14-1User_1-128.png"
+import { UserType } from '../../Redux/UsersReducer'
 
-const User = props => {
+type PropsType = {
+    item: UserType
+    followingInProgress: Array<number>
+    unfollowUser: (id: number) => void
+    followUser: (id: number) => void
+    isAuth: boolean
+}
+
+const User: React.FC<PropsType> = props => {
     const {item,followingInProgress,unfollowUser,followUser,isAuth} = props
     return (
         <div key={item.id} className={c.user}>
@@ -18,8 +27,8 @@ const User = props => {
             {   
                 isAuth ?
                 item.followed ? 
-                    <button disabled={followingInProgress.some(id => id === item.id)} className={c.btn} onClick={() => unfollowUser(item.id)}>Unfollow</button> : 
-                    <button disabled={followingInProgress.some(id => id === item.id)} className={c.btn} onClick={() => followUser(item.id)}>follow</button>
+                    <button disabled={followingInProgress.some((id: number) => id === item.id)} className={c.btn} onClick={() => unfollowUser(item.id)}>Unfollow</button> : 
+                    <button disabled={followingInProgress.some((id: number) => id === item.id)} className={c.btn} onClick={() => followUser(item.id)}>follow</button>
                 : null
             }
             </div>                  

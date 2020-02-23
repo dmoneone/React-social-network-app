@@ -8,9 +8,11 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { maxLength,required } from '../../form_validation_checks/formChecks'
 import c from './ToDoList.module.scss'
 import './../animation.css'
+import { ToDoItemType } from '../../Redux/TodoListReducer'
 
+//need to fix any type !
 const maxLength100 = maxLength(100)
-const ToDoForm = (props) => {
+const ToDoForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit} className={c.toDo_form}>
             <Field name="title" component={Input} type="text" placeholder='title' validate={[maxLength100,required]}/>
@@ -25,9 +27,17 @@ const ToDoReduxForm = reduxForm({
     form: 'toDo-list-form'
 })(ToDoForm)
 
-const ToDoList = React.memo(props => {
+type PropsType = {
+    addNewToDoListItem: (title: string) => void
+    removeToDoListItem: () => void
+    updateToDoListItem: () => void
+    reset: any //need to fix any type !
+    list: Array<ToDoItemType>
+}
+
+const ToDoList: React.FC<PropsType> = React.memo(props => {
     const {list,addNewToDoListItem,removeToDoListItem,updateToDoListItem,reset} = props
-    const onSubmit = data => {
+    const onSubmit = (data: any) => {
         addNewToDoListItem(data.title)
         reset('toDo-list-form')
 
@@ -45,7 +55,7 @@ const ToDoList = React.memo(props => {
                         transitionLeaveTimeout={300}
                     >
                     {
-                        list.map((item,index) => {
+                        list.map((item: ToDoItemType,index) => {
                             return (
                                 <ToDoItem
                                     key={item.id ? item.id : index + Math.random()}

@@ -2,14 +2,22 @@ import React, { useState } from 'react'
 import c from './Users.module.css'
 import cn from 'classnames'
 
-const Paginator = React.memo(props => {
-    const pages = [];
+type PropsType = {
+    usersQuantity: number
+    usersQuantityOnPage: number
+    currentPage: number
+    itemsQuantityInPortion: number
+    loadUsers: (p: number) => void
+}
+
+const Paginator: React.FC<PropsType> = React.memo(props => {
+    const pages: Array<number> = [];
     const pagesQuantity = Math.ceil(props.usersQuantity / props.usersQuantityOnPage)
     for (let i = 1; i <= pagesQuantity; i++) {
         pages.push(i);
     }
     const quantityOfPortions = Math.ceil(pagesQuantity / props.itemsQuantityInPortion)
-    const [portionNumber,setPortionNumber] = useState(1)
+    const [portionNumber,setPortionNumber] = useState<number>(1)
     let leftBorderPositionOfPortion = (portionNumber-1) * props.itemsQuantityInPortion+1
     let rightBorderPositionOfPortion = portionNumber * props.itemsQuantityInPortion
     return (

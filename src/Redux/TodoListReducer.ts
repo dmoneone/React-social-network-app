@@ -2,7 +2,7 @@ import { ToDoList_API } from "../API/api"
 import { updateObjectInArray } from "./object-helpers"
 import { stopSubmit } from "redux-form"
 
-type ToDoItemType = {
+export type ToDoItemType = {
     title: string
     id: string
     order: number

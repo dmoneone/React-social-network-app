@@ -1,18 +1,17 @@
 import {combineReducers,createStore, compose} from 'redux'
-import profilePageReducer from './ProfilePageReducer.ts'
+import profilePageReducer from './ProfilePageReducer'
 import dialogsPageReducer from './DialogsPageReducer'
 import navComponentReducer from './NavComponentReducer'
-import usersPageReducer from './UsersReducer.ts'
-import AuthReducer from './AuthReducer.ts'
+import usersPageReducer from './UsersReducer'
+import AuthReducer from './AuthReducer'
 import thunkMiddleware from 'redux-thunk'; 
 import {applyMiddleware} from 'redux'; 
-import NewsReducer from './NewsReducer.ts'
+import NewsReducer from './NewsReducer'
 import { reducer as formReducer } from 'redux-form'
-import AppReducer from './AppReducer.ts'
-import TodoListReducer from './TodoListReducer.ts'
+import AppReducer from './AppReducer'
+import TodoListReducer from './TodoListReducer'
 
-
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
     navComponent: navComponentReducer,
@@ -24,8 +23,13 @@ const reducers = combineReducers({
     toDoList: TodoListReducer
 })
 
+type RootReducerType = typeof rootReducer
+export type GlobalStateType = ReturnType<RootReducerType>
+
+//@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
+//@ts-ignore
 window.__store__ = store;
 
 export default store;

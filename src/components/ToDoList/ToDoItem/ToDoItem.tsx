@@ -4,8 +4,10 @@ import { Input } from '../../FormComponents/FormComponents'
 import c from './ToDoItem.module.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
+import { ToDoItemType } from '../../../Redux/TodoListReducer'
 
-const UpdateItemForm = (props) => {
+//need to fix any type !
+const UpdateItemForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <Field name="title" component={Input} type="text" placeholder='title' validate={[]}/>
@@ -19,11 +21,17 @@ const UpdateItemReduxForm = reduxForm({
     form: 'update-item-form'
 })(UpdateItemForm)
 
-const ToDoItem = React.memo(props => {
+type PropsType = {
+    item: ToDoItemType
+    removeToDoListItem: (id: string) => void
+    updateToDoListItem: (title: string, id: string) => void
+}
+
+const ToDoItem: React.FC<PropsType> = React.memo(props => {
     const {item,removeToDoListItem,updateToDoListItem} = props
     const [editMode,setEditMode] = useState(false)
 
-    const saveUpdatedItem = data => {
+    const saveUpdatedItem = (data: any) => { //need fix any type
         updateToDoListItem(data.title,item.id)
         setEditMode(false)
     }
