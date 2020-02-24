@@ -1,6 +1,6 @@
 import {News_API} from "../API/api"
 
-type News = {
+export type NewsType = {
     author: string
     title: string
     description: string
@@ -10,7 +10,7 @@ type News = {
 }
 
 const initialState = {
-    news: [] as Array<News>,
+    news: [] as Array<NewsType>,
     isFetching: false
 }
 
@@ -40,7 +40,7 @@ const SET_FETCHING: string = 'social-network/NewsReducer/SET-FETCHING'
 
 type SetNewsActionType = {
     type: typeof SET_NEWS
-    news: Array<News>
+    news: Array<NewsType>
 }
 
 type SetFetchingActionType = {
@@ -48,7 +48,7 @@ type SetFetchingActionType = {
     bool: boolean
 }
 
-export const setNews = (news: Array<News>): SetNewsActionType => ({type: SET_NEWS,news})
+export const setNews = (news: Array<NewsType>): SetNewsActionType => ({type: SET_NEWS,news})
 export const setFetching = (bool: boolean): SetFetchingActionType => ({type: SET_FETCHING,bool})
 
 export const getNews = () => async (dispatch: Function) => {

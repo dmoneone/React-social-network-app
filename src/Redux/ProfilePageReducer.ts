@@ -17,7 +17,7 @@ export type PhotosType = {
     large: string | null
 }
 
-type ProfileType = {
+export type ProfileType = {
     aboutMe: string
     contacts: ContactsType
     lookingForAJob: boolean
@@ -25,7 +25,7 @@ type ProfileType = {
     fullName: string
     userId: number
     photos: PhotosType
-}
+} | null
 
 type PostType = {
     id: number | string
@@ -41,7 +41,7 @@ const initialState = {
         {id: '3', msg: "1", quantityOfLikes: 100,time: '6 Dec 2019 22:13:22'},
         {id: '4', msg: "Chl2222en", quantityOfLikes: 100, time: '6 Dec 2019 22:13:23'}
     ] as Array<PostType>,
-    currentProfile: null as ProfileType | null,
+    currentProfile: null as ProfileType,
     status: 'Some Status'
 }
 

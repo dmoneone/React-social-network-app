@@ -22,10 +22,11 @@ type MapDispatchToProps = {
 
 type PropsType = MapStateToPropsType & MapDispatchToProps
 
-const ToDoListContainer: React.FC<PropsType> = props => {
+const ToDoListContainer: React.FC<PropsType> = (props): JSX.Element => {
     useEffect(() => {
         props.getToDoList()
     },[])
+    
     return (
        <div>
            <ToDoList 

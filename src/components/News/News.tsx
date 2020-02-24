@@ -1,10 +1,16 @@
 import React from 'react';
 import c from './News.module.scss';
 import Preloader from '../../common/Preloader';
+import { NewsType } from '../../Redux/NewsReducer';
 
-const News = props => {
+interface PropsType  {
+    news: Array<NewsType>
+    isFetching: boolean
+}
+
+const News: React.FC<PropsType> = props => {
     return !props.isFetching ?
-            <content className={c.content}>
+            <div className={c.content}>
                 {props.news.map(n => {
                     return (
                         <div key={n.publishedAt} className={c.news_item_block}>
@@ -22,11 +28,8 @@ const News = props => {
                         </div>
                     )
                 } )}
-            </content>
+            </div>
         : <Preloader/>
-
-        
-    
 }
 
 export default News;

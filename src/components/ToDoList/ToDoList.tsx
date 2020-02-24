@@ -1,6 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { reduxForm, Field} from 'redux-form'
+import { reduxForm, Field, InjectedFormProps } from 'redux-form'
 import Button from 'react-bootstrap/Button'
 import { Input } from '../FormComponents/FormComponents'
 import ToDoItem from './ToDoItem/ToDoItem'
@@ -10,9 +10,8 @@ import c from './ToDoList.module.scss'
 import './../animation.css'
 import { ToDoItemType } from '../../Redux/TodoListReducer'
 
-//need to fix any type !
 const maxLength100 = maxLength(100)
-const ToDoForm = (props: any) => {
+const ToDoForm: React.FC<InjectedFormProps> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={c.toDo_form}>
             <Field name="title" component={Input} type="text" placeholder='title' validate={[maxLength100,required]}/>
@@ -23,26 +22,27 @@ const ToDoForm = (props: any) => {
 }
 
 const ToDoReduxForm = reduxForm({
-    // a unique name for the form
     form: 'toDo-list-form'
 })(ToDoForm)
 
 type PropsType = {
     addNewToDoListItem: (title: string) => void
-    removeToDoListItem: () => void
-    updateToDoListItem: () => void
+    removeToDoListItem: (id: string) => void
+    updateToDoListItem: (title: string,id: string) => void
     reset: any //need to fix any type !
     list: Array<ToDoItemType>
 }
 
+export interface SubmitingDataType {
+    title: string
+}
+
 const ToDoList: React.FC<PropsType> = React.memo(props => {
     const {list,addNewToDoListItem,removeToDoListItem,updateToDoListItem,reset} = props
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: any) => { //need to fix any type
         addNewToDoListItem(data.title)
         reset('toDo-list-form')
-
     }
-
     return (
         <div>
             <ToDoReduxForm onSubmit={onSubmit}/>

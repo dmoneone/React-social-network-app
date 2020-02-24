@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, InjectedFormProps } from 'redux-form'
 import { Input } from '../../FormComponents/FormComponents'
 import c from './ToDoItem.module.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
 import { ToDoItemType } from '../../../Redux/TodoListReducer'
+import { SubmitingDataType } from '../ToDoList'
 
 //need to fix any type !
-const UpdateItemForm = (props: any) => {
+const UpdateItemForm: React.FC<InjectedFormProps> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <Field name="title" component={Input} type="text" placeholder='title' validate={[]}/>
@@ -26,6 +27,7 @@ type PropsType = {
     removeToDoListItem: (id: string) => void
     updateToDoListItem: (title: string, id: string) => void
 }
+
 
 const ToDoItem: React.FC<PropsType> = React.memo(props => {
     const {item,removeToDoListItem,updateToDoListItem} = props
