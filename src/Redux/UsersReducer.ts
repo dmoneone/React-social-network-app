@@ -1,6 +1,9 @@
 import {Users_API} from "../API/api";
 import { updateObjectInArray } from "./object-helpers";
 import { PhotosType} from './ProfilePageReducer'
+import { Dispatch } from "redux";
+import { GlobalStateType } from "./redux-store";
+import { ThunkAction } from "redux-thunk";
 
 export type UserType = {
     name: string
@@ -23,64 +26,6 @@ const initialState = {
 }
 
 type StateType = typeof initialState
-
-const usersPageReducer = (state: StateType = initialState,action: any): StateType => {
-    switch(action.type){
-        case 'social-network/UsersReducer/FOLLOW':
-        return {
-            ...state,
-            users: updateObjectInArray(state.users,action.userId,'id',{followed: true})
-        }
-
-        case 'social-network/UsersReducer/UNFOLLOW':
-        return {
-            ...state,
-            users: updateObjectInArray(state.users,action.userId,'id',{followed: false})
-        }
-
-        case 'social-network/UsersReducer/SET-USERS':
-        return{
-            ...state,
-            users: [...action.users]
-        }
-        
-        case 'social-network/UsersReducer/SET-CURRENT-PAGE':    
-        return {
-            ...state,
-            currentPage: action.c
-        }
-
-        case 'social-network/UsersReducer/SET-USERS-QUANTITY':
-        return {
-            ...state,
-            usersQuantity: action.q
-        }
-
-        case 'social-network/UsersReducer/SET-FETCHING':
-        return {
-            ...state,
-            isFetching: action.bool
-        }
-
-        case 'social-network/UsersReducer/SET-FOLLOWING-IN-PROGRESS': 
-        return {
-            ...state,
-            followingInProgress: action.bool ?
-                                 [...state.followingInProgress,action.id] :
-                                 state.followingInProgress.filter(id => id !== action.id)
-        }
-
-        default: return state;
-    }
-}
-
-const FOLLOW = 'social-network/UsersReducer/FOLLOW'
-const UNFOLLOW = 'social-network/UsersReducer/UNFOLLOW'
-const SET_USERS = 'social-network/UsersReducer/SET-USERS'
-const SET_CURRENT_PAGE = 'social-network/UsersReducer/SET-CURRENT-PAGE'
-const SET_USERS_QUANTITY = 'social-network/UsersReducer/SET-USERS-QUANTITY'
-const SET_FETCHING = 'social-network/UsersReducer/SET-FETCHING'
-const SET_FOLLOWING_IN_PROGRESS = 'social-network/UsersReducer/SET-FOLLOWING-IN-PROGRESS'
 
 type FollowActionType = {
     type: typeof FOLLOW
@@ -118,6 +63,68 @@ type SetFollowingInProgressActionType = {
     id: number
 }
 
+type ActionsType = FollowActionType | UnFollowActionType | SetUsersActionType | SetCurrentPageActionType | SetUsersQunatityActionType | SetFetchingActionType | SetFollowingInProgressActionType
+
+const usersPageReducer = (state: StateType = initialState,action: ActionsType): StateType => {
+    switch(action.type){
+        case FOLLOW:
+        return {
+            ...state,
+            users: updateObjectInArray(state.users,action.userId,'id',{followed: true})
+        }
+
+        case UNFOLLOW:
+        return {
+            ...state,
+            users: updateObjectInArray(state.users,action.userId,'id',{followed: false})
+        }
+
+        case SET_USERS:
+        return{
+            ...state,
+            users: [...action.users],
+        }
+        
+        case SET_CURRENT_PAGE:    
+        return {
+            ...state,
+            currentPage: action.c
+        }
+
+        case SET_USERS_QUANTITY:
+        return {
+            ...state,
+            usersQuantity: action.q
+        }
+
+        case SET_FETCHING:
+        return {
+            ...state,
+            isFetching: action.bool
+        }
+
+        case SET_FOLLOWING_IN_PROGRESS: 
+        return {
+            ...state,
+            followingInProgress: action.bool ?
+                                 [...state.followingInProgress,action.id] :
+                                 state.followingInProgress.filter(id => id !== action.id)
+        }
+
+        default: return state;
+    }
+}
+
+const FOLLOW = 'social-network/UsersReducer/FOLLOW'
+const UNFOLLOW = 'social-network/UsersReducer/UNFOLLOW'
+const SET_USERS = 'social-network/UsersReducer/SET-USERS'
+const SET_CURRENT_PAGE = 'social-network/UsersReducer/SET-CURRENT-PAGE'
+const SET_USERS_QUANTITY = 'social-network/UsersReducer/SET-USERS-QUANTITY'
+const SET_FETCHING = 'social-network/UsersReducer/SET-FETCHING'
+const SET_FOLLOWING_IN_PROGRESS = 'social-network/UsersReducer/SET-FOLLOWING-IN-PROGRESS'
+
+export type DispatchType = Dispatch<ActionsType>
+type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType>
 
 export const follow = (userId: number): FollowActionType => ({type: FOLLOW, userId})
 export const unfollow = (userId: number): UnFollowActionType => ({type: UNFOLLOW, userId})
@@ -127,7 +134,7 @@ export const setUsersQunatity = (q: number): SetUsersQunatityActionType => ({typ
 export const setFetching = (bool: boolean): SetFetchingActionType => ({type: SET_FETCHING, bool})
 export const setFollowingInProgress = (bool: boolean, id: number): SetFollowingInProgressActionType => ({type: SET_FOLLOWING_IN_PROGRESS, bool, id})
 
-const followUnfollowFlow = async (apiMethod: Function,action: any,id: number,dispatch: Function) => {
+const followUnfollowFlow = async (apiMethod: any, action: (id: number) => ActionsType, id: number, dispatch: DispatchType) => {
     dispatch(setFollowingInProgress(true,id))
     const data = await apiMethod(id)
     if(data.resultCode === 0) {
@@ -136,15 +143,15 @@ const followUnfollowFlow = async (apiMethod: Function,action: any,id: number,dis
     dispatch(setFollowingInProgress(false,id)) 
 }
 
-export const gettingFollow = (id: number) => (dispatch: Function) => {
+export const gettingFollow = (id: number): ThunkType => async (dispatch,getState) => {
     followUnfollowFlow(Users_API.followUser,follow,id,dispatch)
 }
 
-export const gettingUnfollow = (id: number) => (dispatch: Function) => {
+export const gettingUnfollow = (id: number): ThunkType => async (dispatch,getState) => {
     followUnfollowFlow(Users_API.unfollowUser,unfollow,id,dispatch)
 }
 
-export const getUsers = (currentPage: number, usersQuantityOnPage: number) => async (dispatch: Function) => {
+export const getUsers = (currentPage: number, usersQuantityOnPage: number): ThunkType => async (dispatch,getState) => {
         dispatch(setFetching(true))
         const data = await Users_API.getUsers(currentPage,usersQuantityOnPage)
         dispatch(setFetching(false))

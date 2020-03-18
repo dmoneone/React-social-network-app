@@ -1,4 +1,4 @@
-import * as axios from 'axios'
+import axios from 'axios'
 
 const instance = axios.create({
     withCredentials: true,
@@ -9,19 +9,19 @@ const instance = axios.create({
 })
 
 export const Users_API = {
-    getUsers(currentPage,usersQuantityOnPage) {
+    getUsers(currentPage: number, usersQuantityOnPage: number) {
         return instance
             .get(`users?page=${currentPage}&count=${usersQuantityOnPage}`)
             .then(res => {
                 return res.data
             })
     },
-    followUser(id) {
+    followUser(id: number) {
         return instance 
             .post('follow/'+id)
             .then(res =>  res.data)
     },
-    unfollowUser(id) {
+    unfollowUser(id: number) {
         return instance 
             .delete('follow/'+id)
             .then(res =>  res.data)
@@ -29,26 +29,26 @@ export const Users_API = {
 }
 
 export const Profile_API = {
-    getUserProfile(id,authorized) {
+    getUserProfile(id: number | null | undefined, authorized: number | null | undefined) {
         return instance
             .get(`profile/${ !id ? authorized : id }`)
             .then(res => {
                 return res.data
             })
     },
-    getUserStatus(id,authorized) {
+    getUserStatus(id: number | null | undefined, authorized: number | null | undefined) {
         return instance 
             .get(`profile/status/${ !id ? authorized : id }`)
             .then(res => {
                 return res.data
             })
     },
-    setUserStatus(status) {
+    setUserStatus(status: string) {
         return instance 
             .put(`profile/status`, {status})
             
     },
-    setProfile(data) {
+    setProfile(data: any) {
         let payload
         if(!data.hasOwnProperty('lookingForAJob')){
             payload = {...data,lookingForAJob: false}
@@ -59,7 +59,7 @@ export const Profile_API = {
         return instance 
             .put(`profile`, payload)
     },
-    savePhoto(file) {
+    savePhoto(file: any) {
         const formData = new FormData();
         formData.append("image", file);
         return instance
@@ -71,22 +71,52 @@ export const Profile_API = {
     }
 }
 
+export enum ResultCodesEnum {
+    success = 0,
+    error = 1,
+    captcha = 10
+}
+
+interface AuthResponse  {
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
+
+interface AuthMeResponseType extends AuthResponse{
+    data: {
+        id: number
+        email: string
+        login: string
+
+    }
+}
+
+interface LoginResponseType extends AuthResponse {
+    data: {
+        userId: number
+    }
+}
+
+interface LoginOutResponseType extends AuthResponse {
+    data: object
+}
+
 export const Auth_API = {
     authMe() {
         return instance
-            .get('auth/me')
+            .get<AuthMeResponseType>('auth/me')
             .then(res => {
                 return res.data
             })
 
     },
-    login(email,password,rememberMe = false,captcha = null) {
+    login(email: string, password: string,rememberMe = false, captcha: null | string = null) {
         return instance
-            .post('auth/login',{email,password,rememberMe,captcha})
+            .post<LoginResponseType>('auth/login',{email,password,rememberMe,captcha})
     },
     logout() {
         return instance
-            .delete('auth/login')
+            .delete<LoginOutResponseType>('auth/login')
     }
     
 }
@@ -110,13 +140,13 @@ export const ToDoList_API = {
     getToDoList() {
         return instance.get('todo-lists')
     },
-    addToDoListItem(title) {
+    addToDoListItem(title: string) {
         return instance.post('todo-lists',{title}).then(res => res.data)
     },
-    removeToDoListItem(id) {
+    removeToDoListItem(id: string) {
         return instance.delete('todo-lists/' + id)
     },
-    updateToDoListItem(title,id) {
+    updateToDoListItem(title: string, id: string) {
         return instance.put('todo-lists/' + id,{title}).then(res => res.data)
     }
 }

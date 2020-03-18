@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
 import { reduxForm, Field, InjectedFormProps } from 'redux-form'
-import { Input } from '../../FormComponents/FormComponents'
+import { Input, createField } from '../../FormComponents/FormComponents'
 import c from './ToDoItem.module.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
 import { ToDoItemType } from '../../../Redux/TodoListReducer'
-import { SubmitingDataType } from '../ToDoList'
 
-//need to fix any type !
-const UpdateItemForm: React.FC<InjectedFormProps> = (props) => {
+type SubmitingDataType = {
+    title: string
+}
+
+type NameType = keyof SubmitingDataType
+
+const UpdateItemForm: React.FC<InjectedFormProps<SubmitingDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="title" component={Input} type="text" placeholder='title' validate={[]}/>
+            {createField<NameType>(Input,'title','text','title',[])}
             <button>save</button>
         </form>
     )
 }
 
-const UpdateItemReduxForm = reduxForm({
+const UpdateItemReduxForm = reduxForm<SubmitingDataType,{}>({
     // a unique name for the form
     form: 'update-item-form'
 })(UpdateItemForm)
@@ -28,12 +32,11 @@ type PropsType = {
     updateToDoListItem: (title: string, id: string) => void
 }
 
-
 const ToDoItem: React.FC<PropsType> = React.memo(props => {
     const {item,removeToDoListItem,updateToDoListItem} = props
     const [editMode,setEditMode] = useState(false)
 
-    const saveUpdatedItem = (data: any) => { //need fix any type
+    const saveUpdatedItem = (data: SubmitingDataType) => { 
         updateToDoListItem(data.title,item.id)
         setEditMode(false)
     }

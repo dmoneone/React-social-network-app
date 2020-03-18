@@ -1,6 +1,8 @@
 import { ToDoList_API } from "../API/api"
 import { updateObjectInArray } from "./object-helpers"
 import { stopSubmit } from "redux-form"
+import { ThunkAction } from "redux-thunk"
+import { GlobalStateType } from "./redux-store"
 
 export type ToDoItemType = {
     title: string
@@ -15,41 +17,6 @@ const initialState = {
 }
 
 type StateType = typeof initialState
-
-const todoListReducer = (state: StateType = initialState,action: any): StateType => {
-    switch(action.type) {
-        case 'social-network/NewsReducer/SET-TODO-LIST': {
-            return {
-                ...state,
-                todoList: action.list
-            }
-        }
-        case 'social-network/NewsReducer/SAVE-NEW-ITEM': {
-            return {
-                ...state,
-                todoList: [...state.todoList,action.item]
-            }
-        }
-        case 'social-network/NewsReducer/REMOVE_ITEM': {
-            return {
-                ...state,
-                todoList: state.todoList.filter(item => item.id !== action.id)
-            }
-        }
-        case 'social-network/NewsReducer/UPDATE': {
-            return {
-                ...state,
-                todoList: updateObjectInArray(state.todoList,action.id,'id',{title: action.title})
-            }
-        }
-        default: return state
-    }
-}
-
-const SET_TODO_LIST = 'social-network/NewsReducer/SET-TODO-LIST'
-const SAVE_NEW_ITEM = 'social-network/NewsReducer/SAVE-NEW-ITEM'
-const REMOVE_ITEM = 'social-network/NewsReducer/REMOVE_ITEM'
-const UPDATE_ITEM = 'social-network/NewsReducer/UPDATE'
 
 type SetToDoListActionType = {
     type: typeof SET_TODO_LIST
@@ -72,6 +39,43 @@ type UpdateItemActionType = {
     title: string
 }
 
+type ActionsType = SetToDoListActionType | SaveNewItemActionType | RemoveItemActionType | UpdateItemActionType 
+
+const todoListReducer = (state: StateType = initialState,action: ActionsType): StateType => {
+    switch(action.type) {
+        case SET_TODO_LIST: {
+            return {
+                ...state,
+                todoList: action.list,
+            }
+        }
+        case SAVE_NEW_ITEM: {
+            return {
+                ...state,
+                todoList: [...state.todoList,action.item]
+            }
+        }
+        case REMOVE_ITEM: {
+            return {
+                ...state,
+                todoList: state.todoList.filter(item => item.id !== action.id)
+            }
+        }
+        case UPDATE_ITEM: {
+            return {
+                ...state,
+                todoList: updateObjectInArray(state.todoList,action.id,'id',{title: action.title})
+            }
+        }
+        default: return state
+    }
+}
+
+const SET_TODO_LIST = 'social-network/NewsReducer/SET-TODO-LIST'
+const SAVE_NEW_ITEM = 'social-network/NewsReducer/SAVE-NEW-ITEM'
+const REMOVE_ITEM = 'social-network/NewsReducer/REMOVE_ITEM'
+const UPDATE_ITEM = 'social-network/NewsReducer/UPDATE'
+
 const setToDoList = (list: Array<ToDoItemType>): SetToDoListActionType => ({
     type: SET_TODO_LIST,
     list
@@ -90,14 +94,16 @@ const updateItem = (id: string, title: string): UpdateItemActionType => ({
     title
 })
 
-export const getToDoList = () => async (dispatch: Function)=> {
+type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType>
+
+export const getToDoList = (): ThunkType => async (dispatch)=> {
     const res = await ToDoList_API.getToDoList()
     if(res.status === 200) {
         dispatch(setToDoList(res.data))
     }
 }
-
-export const addNewToDoListItem = (title: string) => async (dispatch: Function) => {
+//need to fix any
+export const addNewToDoListItem = (title: string): ThunkAction<Promise<void>,GlobalStateType,unknown,any> => async (dispatch) => {
     const res = await ToDoList_API.addToDoListItem(title)
     switch(res.resultCode) {
         case 0: {
@@ -112,12 +118,12 @@ export const addNewToDoListItem = (title: string) => async (dispatch: Function) 
     }
 }
 
-export const removeToDoListItem = (id: string) => async (dispatch: Function) => {
+export const removeToDoListItem = (id: string): ThunkType => async (dispatch,getState) => {
     await ToDoList_API.removeToDoListItem(id)
     dispatch(removeItem(id))
 }
 
-export const updateToDoListItem = (title: string, id: string) => async (dispatch: Function) => {
+export const updateToDoListItem = (title: string, id: string): ThunkType => async (dispatch) => {
     const res = await ToDoList_API.updateToDoListItem(title,id)
     if(res.resultCode === 0) {
         dispatch(updateItem(id,title))

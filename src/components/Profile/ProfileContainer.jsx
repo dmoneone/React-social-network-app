@@ -42,7 +42,6 @@ class ProfileGettingAPI extends React.Component {
 
 
 const mapStateToProps = state => {
-
     return {
         profile: getProfileSelector(state),
         authorized: getAuthorizedUserIdFormState(state),

@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { reduxForm, Field, InjectedFormProps } from 'redux-form'
 import Button from 'react-bootstrap/Button'
-import { Input } from '../FormComponents/FormComponents'
+import { Input, createField } from '../FormComponents/FormComponents'
 import ToDoItem from './ToDoItem/ToDoItem'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { maxLength,required } from '../../form_validation_checks/formChecks'
@@ -10,18 +10,23 @@ import c from './ToDoList.module.scss'
 import './../animation.css'
 import { ToDoItemType } from '../../Redux/TodoListReducer'
 
+interface SubmitingDataType {
+    title: string
+}
+
+type NameType = Extract<keyof SubmitingDataType,string>
 const maxLength100 = maxLength(100)
-const ToDoForm: React.FC<InjectedFormProps> = (props) => {
+const ToDoForm: React.FC<InjectedFormProps<SubmitingDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={c.toDo_form}>
-            <Field name="title" component={Input} type="text" placeholder='title' validate={[maxLength100,required]}/>
+            {createField<NameType>(Input,'title','text','title',[maxLength100,required])}
             {props.error && <span>{props.error}</span>}
             <Button type='submit' variant="success">add</Button>
         </form>
     )
 }
 
-const ToDoReduxForm = reduxForm({
+const ToDoReduxForm = reduxForm<SubmitingDataType,{}>({
     form: 'toDo-list-form'
 })(ToDoForm)
 
@@ -33,13 +38,9 @@ type PropsType = {
     list: Array<ToDoItemType>
 }
 
-export interface SubmitingDataType {
-    title: string
-}
-
 const ToDoList: React.FC<PropsType> = React.memo(props => {
     const {list,addNewToDoListItem,removeToDoListItem,updateToDoListItem,reset} = props
-    const onSubmit = (data: any) => { //need to fix any type
+    const onSubmit = (data: SubmitingDataType) => { //need to fix any type
         addNewToDoListItem(data.title)
         reset('toDo-list-form')
     }
