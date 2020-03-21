@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
-import ProfileStatusWithHooks from './../ProfileStatus/ProfileStatusWithHooks';
+import ProfileStatusWithHooks from '../ProfileStatus/ProfileStatusWithHooks';
 import c from '../ProfileInfo.module.css';
+import { ProfileType } from '../../../../Redux/ProfilePageReducer';
 
-const ProfileData = props => {
+type PropsType = {
+    profile: ProfileType
+    isOwner: boolean
+}
+
+const ProfileData: React.FC<PropsType> = props => {
     const [showContacts,setShowContacts] = useState(false)
     return (
        <>
@@ -22,7 +28,9 @@ const ProfileData = props => {
                         {
                             Object
                                 .keys(props.profile.contacts)
-                                .map((key,index) => {
+                                //@ts-ignore
+                                .map((key: Extract<keyof typeof props.profile.contacts,string>, index: number) => {
+                                //@ts-ignore
                                     return (
                                        <li key={index + Math.random()}>
                                            <span>{key + ': '}</span>

@@ -4,7 +4,7 @@ import { ProfileType } from "../ProfilePageReducer"
 import { ToDoItemType } from "../TodoListReducer"
 import { UserType } from "../UsersReducer"
 
-const getProfileFromState = (state: GlobalStateType): ProfileType => {
+const getProfileFromState = (state: GlobalStateType): ProfileType | null => {
     return state.profilePage.currentProfile
 }
 

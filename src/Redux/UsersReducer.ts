@@ -70,13 +70,13 @@ const usersPageReducer = (state: StateType = initialState,action: ActionsType): 
         case FOLLOW:
         return {
             ...state,
-            users: updateObjectInArray(state.users,action.userId,'id',{followed: true})
+            users: updateObjectInArray(state.users,action.userId,'id',{followed: true}) as Array<UserType>,
         }
 
         case UNFOLLOW:
         return {
             ...state,
-            users: updateObjectInArray(state.users,action.userId,'id',{followed: false})
+            users: updateObjectInArray(state.users,action.userId,'id',{followed: false}) as Array<UserType>
         }
 
         case SET_USERS:

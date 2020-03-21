@@ -1,4 +1,7 @@
 import {getAuth} from './AuthReducer'
+import { ThunkAction } from 'redux-thunk'
+import { GlobalStateType } from './redux-store'
+import { stopSubmit } from 'redux-form'
 
 const initialState = {
     initialization: false
@@ -6,7 +9,13 @@ const initialState = {
 
 type StateType = typeof initialState
 
-const AppReducer = (state: StateType = initialState,action: any): StateType => {
+type SetInitializationActionType = {
+    type: typeof SET_INITIALISATION
+}
+
+type ActionsType = SetInitializationActionType
+
+const AppReducer = (state: StateType = initialState,action: ActionsType): StateType => {
     switch(action.type){
         case 'social-network/AppReducer/SET-INITIALISATION': {
             return {
@@ -20,15 +29,13 @@ const AppReducer = (state: StateType = initialState,action: any): StateType => {
 
 const SET_INITIALISATION: string = 'social-network/AppReducer/SET-INITIALISATION'
 
-type SetInitializationActionType = {
-    type: typeof SET_INITIALISATION
-}
-
 const setInitialization = (): SetInitializationActionType  => ({
     type: SET_INITIALISATION
 })
 
-export const getInitialization = () => async (dispatch: Function) => {
+type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType | ReturnType<typeof stopSubmit>> 
+
+export const getInitialization = (): ThunkType => async (dispatch) => {
     const promise = dispatch(getAuth())
     await Promise.all([promise])
     dispatch(setInitialization())

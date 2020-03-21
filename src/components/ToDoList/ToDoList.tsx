@@ -26,7 +26,7 @@ const ToDoForm: React.FC<InjectedFormProps<SubmitingDataType>> = (props) => {
     )
 }
 
-const ToDoReduxForm = reduxForm<SubmitingDataType,{}>({
+const ToDoReduxForm = reduxForm<SubmitingDataType, {}>({
     form: 'toDo-list-form'
 })(ToDoForm)
 

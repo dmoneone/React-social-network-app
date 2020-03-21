@@ -62,7 +62,7 @@ export const setUserAuth = (userId: number | null, email: string | null, login: 
     resultCode
 })
 
-type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType>
+type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType | ReturnType<typeof stopSubmit>>
 
 export const getAuth = (): ThunkType => async (dispatch) => {
     const data = await Auth_API.authMe() 
@@ -74,8 +74,8 @@ const getCaptcha = (): ThunkType => async (dispatch) => {
     const url = res.data.url
     dispatch(setCaptcha(url))
 }
-//need to fix any
-export const login = (email: string,password: string,rememberMe: boolean,captcha: string | null): ThunkAction<Promise<void>,GlobalStateType,unknown,any> => async (dispatch) => {
+
+export const login = (email: string,password: string,rememberMe: boolean,captcha: string | null): ThunkType => async (dispatch) => {
     const data = await Auth_API.login(email,password,rememberMe,captcha)
     if(data.data.resultCode === ResultCodesEnum.success) {
         dispatch(getAuth())
@@ -88,7 +88,7 @@ export const login = (email: string,password: string,rememberMe: boolean,captcha
     }
 }
 
-export const logout = () => async (dispatch: Function) => {
+export const logout = (): ThunkType => async (dispatch) => {
     const data = await Auth_API.logout()
     if(data.data.resultCode === 0) {
         dispatch(setUserAuth(null, null, null))

@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
     toDoList: TodoListReducer
 })
 
-type RootReducerType = typeof rootReducer
+type RootReducerType = typeof rootReducer //() => globalState
 export type GlobalStateType = ReturnType<RootReducerType>
 
 //@ts-ignore

@@ -3,6 +3,7 @@ import { updateObjectInArray } from "./object-helpers"
 import { stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
 import { GlobalStateType } from "./redux-store"
+import { AnyAction } from "redux"
 
 export type ToDoItemType = {
     title: string
@@ -64,7 +65,7 @@ const todoListReducer = (state: StateType = initialState,action: ActionsType): S
         case UPDATE_ITEM: {
             return {
                 ...state,
-                todoList: updateObjectInArray(state.todoList,action.id,'id',{title: action.title})
+                todoList: updateObjectInArray(state.todoList,action.id,'id',{title: action.title}) as Array<ToDoItemType>
             }
         }
         default: return state
@@ -94,7 +95,7 @@ const updateItem = (id: string, title: string): UpdateItemActionType => ({
     title
 })
 
-type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType>
+type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType | ReturnType<typeof stopSubmit>>
 
 export const getToDoList = (): ThunkType => async (dispatch)=> {
     const res = await ToDoList_API.getToDoList()
@@ -102,8 +103,8 @@ export const getToDoList = (): ThunkType => async (dispatch)=> {
         dispatch(setToDoList(res.data))
     }
 }
-//need to fix any
-export const addNewToDoListItem = (title: string): ThunkAction<Promise<void>,GlobalStateType,unknown,any> => async (dispatch) => {
+
+export const addNewToDoListItem = (title: string): ThunkType => async (dispatch) => {
     const res = await ToDoList_API.addToDoListItem(title)
     switch(res.resultCode) {
         case 0: {
