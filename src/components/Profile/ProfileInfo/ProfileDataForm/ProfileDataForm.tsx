@@ -1,17 +1,30 @@
 import React from 'react'
-import { reduxForm, Field } from 'redux-form'
-import { saveProfileChanges} from '../../../../Redux/ProfilePageReducer'
+import { reduxForm, Field, InjectedFormProps } from 'redux-form'
+import { saveProfileChanges, ProfileType} from '../../../../Redux/ProfilePageReducer'
 import { required,maxLength,url } from '../../../../form_validation_checks/formChecks'
 import { connect } from 'react-redux';
 import { Input } from '../../../FormComponents/FormComponents';
 import c from './ProfileDataForm.module.css'
+import { GlobalStateType } from '../../../../Redux/redux-store';
+import { ThunkAction } from 'redux-thunk';
 
 const maxLength100 = maxLength(100)
 
+export type SubmitingDataType = {
+    fullName: string
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+}
 
-const ProfileDataForm = (props) => {
-    const contacts = []
-    for(const prop in props.profile.contacts) {
+type DataFormOwnProps = {
+    initialValues: ProfileType
+    profile: ProfileType
+}
+
+const ProfileDataForm:React.FC<InjectedFormProps<SubmitingDataType,DataFormOwnProps> & DataFormOwnProps> = (props) => {
+    let contacts = [], prop: keyof typeof props.profile.contacts
+    for(prop in props.profile.contacts) {
         contacts.push({name: prop,url: props.profile.contacts[prop]})
     }
     return (
@@ -35,7 +48,7 @@ const ProfileDataForm = (props) => {
             {
                 Object
                     .keys(props.profile.contacts)
-                    .map((key,index) => {
+                    .map((key, index) => {
                         return (
                             <div className={c.field} key={index + Math.random()}>
                                 <span>{key}: </span> <Field name={'contacts.' + key} component={Input} type="text" />
@@ -49,12 +62,24 @@ const ProfileDataForm = (props) => {
     )
 }
 
-const ProfileDataReduxForm = reduxForm({
+const ProfileDataReduxForm = reduxForm<SubmitingDataType, DataFormOwnProps>({
     form: 'profile-data-form',
-  })(ProfileDataForm)
+})(ProfileDataForm)
 
-const ProfileForm = props => {
-    const submit = data => {
+type MapDispatchToPropsType = {
+    saveProfileChanges: (payload: SubmitingDataType) => Promise<void>
+}
+
+type OwnPropsType = {
+    initialValues: ProfileType
+    profile: ProfileType
+    setEditMode: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+type PropsType = MapDispatchToPropsType & OwnPropsType
+
+const ProfileForm: React.FC<PropsType> = props => {
+    const submit = (data: SubmitingDataType) => {
         props.saveProfileChanges(data)
             .then(() => {
                 props.setEditMode(false)
@@ -72,6 +97,6 @@ const ProfileForm = props => {
     )
 }
 
-
-
-export default connect(null,{saveProfileChanges})(ProfileForm)
+//i must fix it
+//@ts-ignore 
+export default connect<{},MapDispatchToPropsType,{},GlobalStateType>(null,{saveProfileChanges})(ProfileForm)

@@ -4,15 +4,18 @@ import Preloader from '../../../common/Preloader';
 import profileImg from '../../../assets/img/14-1User_1-128.png'
 import ProfileData from './ProfileData/ProfileData';
 import ProfileDataForm from './ProfileDataForm/ProfileDataForm';
-const ProfileInfo = props => {
+import { ProfileType } from '../../../Redux/ProfilePageReducer';
+import { Props } from '../Profile';
+
+const ProfileInfo: React.FC<Props> = props => {
     const [editMode,setEditMode] = useState(false)
     if(!props.profile){
         return <Preloader/>
     }
-    const onChangeFile = e => {
-        if(e.target.files.length) {
+    const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files != null && e.target.files.length) {
             props.updatePhoto(e.target.files[0])
-        }
+        } 
     }
     return (
         <div className={c.block}>

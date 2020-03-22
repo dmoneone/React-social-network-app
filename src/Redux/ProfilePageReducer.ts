@@ -3,6 +3,7 @@ import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
 import { GlobalStateType } from "./redux-store";
 import { AnyAction } from "redux";
+import { SubmitingDataType } from "../components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm";
 
 type ContactsType = {
     facebook: string
@@ -135,7 +136,7 @@ export const getProfile = (id: number | null | undefined, authorized: number | n
     dispatch(setProfile(data))
 }
 
-export const saveProfileChanges = (payload: any): ThunkType => async (dispatch,getState) => {
+export const saveProfileChanges = (payload: SubmitingDataType): ThunkType => async (dispatch,getState) => {
     const data = await Profile_API.setProfile(payload)
     if(data.data.resultCode === 0){
         dispatch(getProfile(null,getState().auth.userId))
