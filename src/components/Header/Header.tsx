@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import c from './Header.module.css'
 import {NavLink} from 'react-router-dom'
-const Header = (props) => {
+
+type Props = {
+    isAuth: boolean
+    login: string
+    logout: () => void
+}
+
+const Header: FC<Props> = (props) => {
     return (
         <header className="header">
             <div className={c.logo_wrap}>
@@ -11,10 +18,10 @@ const Header = (props) => {
             </div>
             <div>
                 {
-                    props.authData.isAuth ? 
+                    props.isAuth ? 
                         <NavLink to={'/profile'} className={c.authorized}>
                             <span>You are authorized:</span>
-                            <span className={c.name}>{props.authData.login}</span>
+                            <span className={c.name}>{props.login}</span>
                             <button onClick={() => props.logout() }>Log Out</button>
                         </NavLink>
                         :

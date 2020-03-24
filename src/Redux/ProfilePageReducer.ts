@@ -131,7 +131,7 @@ export const savePhoto = (photos: PhotosType): SavePhotoActionType => ({type: SA
 
 type ThunkType = ThunkAction<Promise<void>,GlobalStateType,unknown,ActionsType | ReturnType<typeof stopSubmit>>
 
-export const getProfile = (id: number | null | undefined, authorized: number | null | undefined): ThunkType => async (dispatch) => {
+export const getProfile = (id: string | undefined, authorized: number | null): ThunkType => async (dispatch) => {
     const data = await Profile_API.getUserProfile(id,authorized)
     dispatch(setProfile(data))
 }
@@ -139,7 +139,7 @@ export const getProfile = (id: number | null | undefined, authorized: number | n
 export const saveProfileChanges = (payload: SubmitingDataType): ThunkType => async (dispatch,getState) => {
     const data = await Profile_API.setProfile(payload)
     if(data.data.resultCode === 0){
-        dispatch(getProfile(null,getState().auth.userId))
+        dispatch(getProfile(undefined,getState().auth.userId))
     } else {
         const error_msg = data.data.messages.length > 0 ? data.data.messages[0] : 'Input error'
         dispatch(stopSubmit('profile-data-form',{_error: error_msg}))
@@ -147,7 +147,7 @@ export const saveProfileChanges = (payload: SubmitingDataType): ThunkType => asy
     }
 }
 
-export const getStatus = (id: number | null | undefined, authorized: number | null | undefined): ThunkType => async (dispatch) => {
+export const getStatus = (id: string | undefined, authorized: number | null): ThunkType => async (dispatch) => {
     const status = await Profile_API.getUserStatus(id,authorized)
     dispatch(editStatus(status))
 }

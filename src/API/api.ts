@@ -29,14 +29,14 @@ export const Users_API = {
 }
 
 export const Profile_API = {
-    getUserProfile(id: number | null | undefined, authorized: number | null | undefined) {
+    getUserProfile(id: string | undefined, authorized: number | null) {
         return instance
             .get(`profile/${ !id ? authorized : id }`)
             .then(res => {
                 return res.data
             })
     },
-    getUserStatus(id: number | null | undefined, authorized: number | null | undefined) {
+    getUserStatus(id: string | undefined, authorized: number | null) {
         return instance 
             .get(`profile/status/${ !id ? authorized : id }`)
             .then(res => {
