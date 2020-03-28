@@ -13,7 +13,7 @@ const News: React.FC<PropsType> = props => {
             <div className={c.content}>
                 {props.news.map(n => {
                     return (
-                        <div key={n.publishedAt} className={c.news_item_block}>
+                        <div key={n.title + Math.random()} className={c.news_item_block}>
                         <h3>{n.title}</h3>
                         <div className={c.news_item_content}>
                             <div>

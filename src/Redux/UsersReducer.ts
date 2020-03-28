@@ -1,4 +1,4 @@
-import {Users_API} from "../API/api";
+import {Users_API, ResultCodesEnum} from "../API/api";
 import { updateObjectInArray } from "./object-helpers";
 import { PhotosType} from './ProfilePageReducer'
 import { Dispatch } from "redux";
@@ -137,7 +137,7 @@ export const setFollowingInProgress = (bool: boolean, id: number): SetFollowingI
 const followUnfollowFlow = async (apiMethod: any, action: (id: number) => ActionsType, id: number, dispatch: DispatchType) => {
     dispatch(setFollowingInProgress(true,id))
     const data = await apiMethod(id)
-    if(data.resultCode === 0) {
+    if(data.resultCode === ResultCodesEnum.success) {
         dispatch(action(id))
     }
     dispatch(setFollowingInProgress(false,id)) 
