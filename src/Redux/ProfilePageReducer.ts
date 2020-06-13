@@ -40,10 +40,10 @@ type PostType = {
 
 const initialState = {
     postsData : [
-        {id: '1', msg: "jopa", quantityOfLikes: 10, time: '6 Dec 2019 22:13:20'},
-        {id: '2', msg: "Chlen", quantityOfLikes: 100, time: '6 Dec 2019 22:13:21'},
+        {id: '1', msg: "hi", quantityOfLikes: 10, time: '6 Dec 2019 22:13:20'},
+        {id: '2', msg: "hi", quantityOfLikes: 100, time: '6 Dec 2019 22:13:21'},
         {id: '3', msg: "1", quantityOfLikes: 100,time: '6 Dec 2019 22:13:22'},
-        {id: '4', msg: "Chl2222en", quantityOfLikes: 100, time: '6 Dec 2019 22:13:23'}
+        {id: '4', msg: "hi", quantityOfLikes: 100, time: '6 Dec 2019 22:13:23'}
     ] as Array<PostType>,
     currentProfile: null as ProfileType | null,
     status: 'Some Status'
